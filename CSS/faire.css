@@ -1,0 +1,75 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+@font-face {
+    font-family: "dancingScript";
+    src: url('../ASSETS/FONTS/dancingscript.woff2') format('woff2'),
+         url('../ASSETS/FONTS/dancingscript.woff') format('woff');
+}
+.background {
+    background-image: url('../ASSETS/IMAGES/fairGrounds.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.welcome-title {
+    font-family: 'dancingScript', cursive;
+    font-size: 48px;
+    color: #64098f;
+    margin-top: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.clickable {
+    width: 200px;
+    margin: 20px;
+    cursor: pointer;
+    
+}
+
+.clickable h2 {
+    font-family: 'dancingScript', cursive;
+    color: #5024ca;
+}
+
+.clickable img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.return-home {
+    position: absolute; /* Absolute positioning relative to its nearest positioned ancestor (body in this case) */
+    top: 20px; /* Adjust this value as needed */
+    left: 20px; /* Adjust this value as needed */
+}
+
+.return-home button {
+    padding: 10px 15px; /* Adjust padding as needed */
+    background-color: #007bff; /* Adjust background color as needed */
+    color: blue; /* Text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor changes to pointer to indicate clickable area */
+    font-size: 16px; /* Adjust font size as needed */
+    background-image: url("/ASSETS/blueCotton.png");
+    font-family: "danceingScript", cursive;
+}
+
+.return-home button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}

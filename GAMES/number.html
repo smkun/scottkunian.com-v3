@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number!</title>
+    <link rel="stylesheet" href="../CSS/number.css">
+</head>
+<body>
+    <div class="return-home">
+        <button onclick="window.location.href='faire.html'">Faire Grounds</button>
+    </div>
+    <h1>Guess The Number!</h1>
+    <p>Try guessing the number between 1-100 in 10 attempts!</p>
+    <div class="inputs">
+        <label for="guess">Enter Your Guess:</label>
+        <input type="text" id="guess" class="guess">
+        <input type="submit" value="Submit Guess" class="guessSubmit">
+    </div>
+    <div class="results">
+        <p class="guesses"></p>
+        <p class="lastResult"></p>
+        <p class="lowOrHi"></p>
+    </div>
+    <script src="../SCRIPTS/number.js"></script>
+</body>
+</html>

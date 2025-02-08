@@ -1,0 +1,158 @@
+@font-face {
+    font-family: "dancingScript", cursive;
+    src: url("../ASSETS/FONTS/dancingscript.woff2") format("woff2"),
+        url("../ASSETS/FONTS/dancingscript.woff") format("woff");
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../ASSETS/IMAGES/fairGrounds.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 150px;
+}
+
+h1 {
+    font-family: "dancing-script", cursive;
+    font-size: 48px;
+    text-align: center;
+    margin: 0;
+}
+
+#game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 50px;
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: start;
+    width: calc(320px * 3 + 180px);
+    margin: auto;
+    text-align: center;
+    background-image: url("/ASSETS/red-fabric-texture.jpg"); /*“Designed by Freepik”*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#playerPick,
+#deck,
+#magicianPick {
+    height: 480px;
+    width: 320px;
+    margin: 10px 0;
+    padding: 25px;
+    background-color: 0, 0, 0, 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+#deck {
+    grid-column: 2;
+}
+
+button {
+    font-family: "dancing-script", cursive;
+    grid-column: 2;
+    grid-row: 2;
+    cursor: pointer;
+    background-color: #007bff;
+    color: blue;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    visibility: visible;
+    opacity: 1;
+    background-image: url("/ASSETS/blueCotton.png");
+}
+
+button:hover {
+    background-color: #3477be;
+}
+
+button.hidden {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
+#deck img {
+    width: 320px;
+    height: 465px;
+    border-radius: 10px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+span {
+    display: block;
+    margin-top: 20px;
+    color: #666;
+}
+
+#magicianPick {
+    font-family: "dancing-script", cursive;
+    height: 480px;
+    width: 320px;
+    margin: 10px 0;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    color: white;
+    font-size: 20px;
+}
+
+.return-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.return-home button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: blue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "dancingScript", cursive;
+    background-image: url("/ASSETS/blueCotton.png");
+}
+
+.return-home button:hover {
+    background-color: #0056b3;
+}

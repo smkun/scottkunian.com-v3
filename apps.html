@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Apps</title>
+    <link rel="stylesheet" href="CSS/styles.css" />
+    <script src="SCRIPTS/script.js" defer></script>
+</head>
+<body>
+    <!-- Matrix Effect Background -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Unified Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="apps.html" class="nav-link active">My Apps</a></li>
+            <li><a href="field-notes.html" class="nav-link">Field Notes</a></li>
+        </ul>
+        <!-- Theme Switcher -->
+        <!-- <label for="themeSelector" class="visually-hidden">Select Theme</label> -->
+        <select id="themeSelector" class="theme-selector" title="Select Theme">
+            <option value="theme-purple">Purple</option>
+            <option value="theme-green">Green</option>
+            <option value="theme-red">Red</option>
+            <option value="theme-blue">Blue</option>
+        </select>
+    </nav>
+
+    <section class="apps-section">
+        <h1>🚀 Some Stuff I've Built</h1>
+
+        <h2>🎮 Dive Into My Live Creations</h2>
+        <ul class="app-list">
+            <li><a href="GAMES/ffc.html" class="app-link">Freight Rate Calculator 🚚</a></li>
+            <li><a href="GAMES/memory.html" class="app-link">Memory Game 🧠</a></li>
+            <li><a href="GAMES/ttt.html" class="app-link">Tic Tac Toe ❌⭕</a></li>
+            <li><a href="GAMES/number.html" class="app-link">Number Guessing Game 🔢</a></li>
+            <li><a href="GAMES/lps.html" class="app-link">Lapis Papyrus Scalpellus 🗿📜✂️</a></li>
+        </ul>
+
+        <h2>💻 Code Collections</h2>
+        <div class="repo-grid">
+            <div class="repo-item">
+                <h3>Alien Blaster Project</h3>
+                <img src="ASSETS/IMAGES/ab.jpg" alt="Alien Blaster" />
+                <a href="https://github.com/smkun/alien-blaster-project.git" target="_blank" rel="noopener" class="repo-link">GitHub Repo</a>
+            </div>
+
+            <div class="repo-item">
+                <h3>Hangman</h3>
+                <img src="ASSETS/IMAGES/hm.jpg" alt="Hangman" />
+                <a href="https://github.com/smkun/Hangman-Python.git" target="_blank" rel="noopener" class="repo-link">GitHub Repo</a>
+            </div>
+
+            <div class="repo-item">
+                <h3>SuperHero</h3>
+                <img src="ASSETS/IMAGES/sh.jpg" alt="SuperHero" />
+                <a href="https://github.com/smkun/SuperHero.git" target="_blank" rel="noopener" class="repo-link">GitHub Repo</a>
+            </div>
+
+            <div class="repo-item">
+                <h3>Medic Elite</h3>
+                <img src="ASSETS/IMAGES/me.jpg" alt="Medic Elite" />
+                <a href="https://github.com/smkun/company-lab.git" target="_blank" rel="noopener" class="repo-link">GitHub Repo</a>
+            </div>
+
+            <div class="repo-item">
+                <h3>Calculator</h3>
+                <img src="ASSETS/IMAGES/calc.jpg" alt="Calculator" />
+                <a href="https://github.com/smkun/Calculator.git" target="_blank" rel="noopener" class="repo-link">GitHub Repo</a>
+            </div>
+
+            <div class="repo-item">
+                <h3>Star Wars DB</h3>
+                <img src="ASSETS/IMAGES/swdb.jpg" alt="Star Wars DB" />
+                <a href="https://github.com/smkun/fetching-data-in-react-lab.git" target="_blank" rel="noopener" class="repo-link">GitHub Repo</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Scott Kunian. All rights reserved.</p>
+    </footer>
+
+    <!-- Matrix Effect Script -->
+    <script src="SCRIPTS/matrix.js"></script>
+</body>
+</html>

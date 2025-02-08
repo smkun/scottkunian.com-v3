@@ -1,0 +1,164 @@
+@font-face {
+    font-family: "dancingScript";
+    src: url("../ASSETS/FONTS/dancingscript.woff2") format("woff2"),
+         url("../ASSETS/FONTS/dancingscript.woff") format("woff");
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-image: url("../ASSETS/IMAGES/fairGrounds.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "dancingScript", sans-serif;
+}
+
+p {
+    font-family: "dancingScript", cursive;
+    font-size: 24px;
+    color: black;
+    text-align: center;
+
+}
+
+body {
+    position: relative;
+}
+
+h1 {
+    font-family: "dancingScript", cursive;
+    color: #00539f;
+    font-size: 48px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.return-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.return-home button {
+    font-family: "dancingScript", cursive;
+
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font-family: "dancingScript", cursive;
+}
+
+.return-home button:hover {
+    background-color: #0056b3;
+}
+
+.inputs, .results {
+    font-family: "dancingScript", cursive;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    background-image: url("/ASSETS/red-fabric-texture.jpg");
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.guessSubmit, .guessField {
+    font-family: "dancingScript", cursive;
+    font-size: 1.4rem;
+    padding: 10px;
+    margin: 20px;
+}
+
+#enter {
+    color: rgb(221, 221, 105);
+}
+
+.guesses, .lastResult, .lowOrHi {
+    font-family: "dancingScript", cursive;
+    color: white;
+    font-size: 2rem;
+}
+
+.lastResult, .lowOrHi {
+    font-family: "dancingScript", cursive;
+    padding: 3px;
+    border-radius: 8px;
+}
+
+.guessSubmit {
+    font-family: "dancingScript", scursive;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "dancingScript";
+}
+
+.guessSubmit:hover {
+    background-color: #0056b3;
+}
+.inputs {
+    font-family: "dancingScript", cursive;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background-image: url("/ASSETS/red-fabric-texture.jpg");
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.guessField {
+    font-family: "dancingScript", cursive;
+    font-size: 1.4rem;
+    padding: 10px;
+    margin-right: 10px; 
+    flex: 1; 
+}
+
+.guessSubmit {
+    font-family: "dancingScript", cursive;
+    font-size: 1.4rem;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.play-again-btn {
+    padding: 10px 20px;
+    font-size: 1.4rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'dancingScript', cursive;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.play-again-btn:hover {
+    background-color: #0056b3;
+}
