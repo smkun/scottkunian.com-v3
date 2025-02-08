@@ -7,14 +7,42 @@ const sections = {
   error: document.getElementById('error')
 };
 
+// Array of headshot images
+const headshots = [
+  'ASSETS/IMAGES/ScottHeadshot.jpeg',
+  'ASSETS/IMAGES/ScottHeadshot2.jpeg',
+  'ASSETS/IMAGES/ScottHeadshot3.jpeg',
+  'ASSETS/IMAGES/ScottHeadshot4.jpeg'
+];
+
+let currentHeadshotIndex = 0;
+
+function rotateHeadshot() {
+  const profileImage = document.querySelector('.profile-image');
+  if (profileImage) {
+      currentHeadshotIndex = (currentHeadshotIndex + 1) % headshots.length;
+      
+      // Create new image to preload
+      const newImage = new Image();
+      newImage.onload = function() {
+          // Fade out current image
+          profileImage.style.transition = 'opacity 0.3s ease-out';
+          profileImage.style.opacity = '0';
+          
+          setTimeout(() => {
+              // Change source and fade in
+              profileImage.src = headshots[currentHeadshotIndex];
+              profileImage.style.opacity = '1';
+          }, 300);
+      };
+      newImage.src = headshots[currentHeadshotIndex];
+  }
+}
+
 // Simple Router (for SPA navigation)
 function navigate() {
   const hash = window.location.hash.substring(1) || 'home';
-
-  // Hide all sections
   Object.values(sections).forEach(section => section?.classList.add('hidden'));
-
-  // Show the current section
   if (sections[hash]) {
       sections[hash].classList.remove('hidden');
   } else {
@@ -22,25 +50,9 @@ function navigate() {
   }
 }
 
-// Contact Form Handling
-document.getElementById('contactForm')?.addEventListener('submit', function (e) {
-  e.preventDefault();
-  document.getElementById('confirmationMessage').style.display = 'block';
-  this.reset();
-});
-
 // Initial Load & Route Change
 window.addEventListener('load', navigate);
 window.addEventListener('hashchange', navigate);
-
-// Smooth Scroll Navigation
-document.querySelectorAll('nav a').forEach(link => {
-  link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = this.getAttribute('href');
-      window.location.href = target;
-  });
-});
 
 // Highlight the current page in the navbar
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,35 +66,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// === Theme Selector Logic ===
+// === Theme Switcher Logic ===
 const themeSelector = document.getElementById("themeSelector");
-const themes = ["theme-purple", "theme-green", "theme-red", "theme-blue"];
+const themes = ["theme-purple", "theme-green", "theme-red", "theme-blue", "theme-light"];
 
 // Apply saved theme on page load
 window.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("preferredTheme") || "theme-purple";
-  document.body.classList.add(savedTheme);
-  if (themeSelector) {
-      themeSelector.value = savedTheme;
+  const savedTheme = localStorage.getItem("preferredTheme");
+  if (savedTheme) {
+      document.body.classList.add(savedTheme);
+  } else {
+      document.body.classList.add("theme-purple"); // Default Theme
   }
 });
 
-// Theme selection functionality
-themeSelector?.addEventListener("change", () => {
-  const selectedTheme = themeSelector.value;
-
-  // Remove all themes
+// Theme change handler
+themeSelector?.addEventListener("change", (e) => {
+  const selectedTheme = e.target.value;
+  
+  // Remove previous theme
   themes.forEach(theme => document.body.classList.remove(theme));
-
-  // Apply the selected theme
+  
+  // Apply new theme
   document.body.classList.add(selectedTheme);
-
-  // Save preference to localStorage
+  
+  // Save preference
   localStorage.setItem("preferredTheme", selectedTheme);
+  
+  // Dispatch theme change event for the effects
+  const event = new Event('themechange');
+  window.dispatchEvent(event);
+  
+  // Rotate headshot
+  rotateHeadshot();
+});
 
-  // Refresh Matrix Effect color
-  setTimeout(() => {
-      const event = new Event('resize');
-      window.dispatchEvent(event);
-  }, 100);
+// Effect change handler
+document.getElementById("effectSelector")?.addEventListener("change", () => {
+  rotateHeadshot();
 });

@@ -1,46 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Scott Kunian - Portfolio</title>
-    <link rel="stylesheet" href="CSS/styles.css" />
-    <script src="SCRIPTS/script.js" defer></script>
-</head>
-<body>
-    <!-- Matrix Effect Background -->
-    <canvas id="matrixCanvas"></canvas>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+        <title>Scott Kunian - Portfolio</title>
+        <link
+            rel="stylesheet"
+            href="CSS/styles.css" />
+        <script
+            src="SCRIPTS/script.js"
+            defer></script>
+        <script
+            src="SCRIPTS/effects.js"
+            defer></script>
+    </head>
+    <body>
+        <canvas id="effectCanvas"></canvas>
+        <!-- Unified Navigation Bar -->
+        <nav class="navbar">
+            <select id="effectSelector" title="Select Effect">
+                <option value="matrix">Matrix</option>
+                <option value="particles">Particles</option>
+                <option value="waves">Waves</option>
+            </select>
+            <!-- Social Icons (Left) -->
+            <div class="social-icons">
+                <a
+                    href="https://www.linkedin.com/in/scott-kunian-8984302/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Visit LinkedIn Profile">
+                    <img
+                        src="ASSETS/IMAGES/linkedin-brands-solid.svg"
+                        alt="LinkedIn"
+                        class="nav-icon" />
+                </a>
+                <a
+                    href="https://www.facebook.com/skunian/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Visit Facebook Profile">
+                    <img
+                        src="ASSETS/IMAGES/facebook-brands-solid.svg"
+                        alt="Facebook"
+                        class="nav-icon" />
+                </a>
+            </div>
+            <!-- Navigation Links Center -->
+            <ul>
+                <li>
+                    <a
+                        href="index.html"
+                        class="nav-link"
+                        >Home</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="about.html"
+                        class="nav-link"
+                        >About</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="apps.html"
+                        class="nav-link"
+                        >My Apps</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="field-notes.html"
+                        class="nav-link"
+                        >Field Notes</a
+                    >
+                </li>
+            </ul>
 
-    <!-- Unified Navigation Bar -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html" class="nav-link active">Home</a></li>
-            <li><a href="about.html" class="nav-link">About</a></li>
-            <li><a href="apps.html" class="nav-link">My Apps</a></li>
-            <li><a href="field-notes.html" class="nav-link">Field Notes</a></li>
-        </ul>
-            <!-- Theme Switcher -->
-            <select id="themeSelector" class="theme-selector" title="Select Theme">
-              <option value="theme-purple">Purple</option>
-              <option value="theme-green">Green</option>
-              <option value="theme-red">Red</option>
-              <option value="theme-blue">Blue</option>
-          </select>
-          
-    </nav>
+            <!-- Theme Switcher Right -->
+            <select
+                id="themeSelector"
+                class="theme-selector"
+                title="Select Theme">
+                <option value="theme-purple">Purple</option>
+                <option value="theme-green">Green</option>
+                <option value="theme-red">Red</option>
+                <option value="theme-blue">Blue</option>
+                <option value="theme-light">Light</option>
+            </select>
+        </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-section">
-        <h1>Welcome to Scott Kunian's Portfolio</h1>
-        <p>IT Professional | Software & Senior Systems Engineer</p>
-        <img src="ASSETS/IMAGES/ScottHeadshot.jpeg" alt="Scott Kunian" class="profile-image" />
-    </header>
+        <!-- Hero Section -->
+        <header class="hero-section">
+            <h1>🗺️ Leveling Up in Tech & Life with Scott Kunian</h1>
+            <p>IT Professional | Software & Senior Systems Engineer</p>
+            <img
+                src="ASSETS/IMAGES/ScottHeadshot.jpeg"
+                alt="Scott Kunian"
+                class="profile-image" />
+        </header>
 
-    <footer>
-        <p>&copy; 2025 Scott Kunian. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2025 Scott Kunian. All rights reserved.</p>
+        </footer>
 
-    <!-- Matrix Effect Script -->
-    <script src="SCRIPTS/matrix.js"></script>
-</body>
+    </body>
 </html>
