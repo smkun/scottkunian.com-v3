@@ -54,7 +54,7 @@ function loadParticlesEffect() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const particles = Array(150)
+    const particles = Array(300)
         .fill()
         .map(() => ({
             x: Math.random() * canvas.width,
@@ -64,19 +64,52 @@ function loadParticlesEffect() {
             dy: Math.random() * 4 - 2,
         }));
 
+    let mouse = { x: null, y: null };
+
+    // Track mouse movement
+    window.addEventListener("mousemove", (event) => {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+    });
+
+    window.addEventListener("mouseleave", () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
     function drawParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = getMatrixColor();
 
         particles.forEach((p) => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
+            // Repel effect
+            if (mouse.x && mouse.y) {
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const maxDistance = 100;
+
+                if (distance < maxDistance) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (maxDistance - distance) / maxDistance;
+
+                    p.dx += Math.cos(angle) * force;
+                    p.dy += Math.sin(angle) * force;
+                }
+            }
+
+            // Move particle
             p.x += p.dx;
             p.y += p.dy;
 
+            // Boundary checks
             if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
             if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
         });
 
         particlesAnimation = requestAnimationFrame(drawParticles);
