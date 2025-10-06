@@ -82,7 +82,7 @@ Database Type:     FIRESTORE_NATIVE
 
 3. Run admin claim setup script:
    ```bash
-   node scripts/setAdminClaim.js
+   node TOOLS/setAdminClaim.js
    ```
 
 4. Sign out and sign in again to refresh token

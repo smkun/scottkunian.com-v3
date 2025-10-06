@@ -79,7 +79,7 @@ cp .env.example .env
 
 3. **Setup Admin Access**
    - Download Firebase service account key
-   - Run: `node scripts/setAdminClaim.js`
+   - Run: `node TOOLS/setAdminClaim.js`
    - See [docs/ADMIN_SETUP.md](docs/ADMIN_SETUP.md) for details
 
 ### Development
@@ -134,7 +134,7 @@ scottkunian.com-v4/
 │   ├── hooks/            # Custom React hooks
 │   ├── styles/           # Global styles and Tailwind
 │   └── App.tsx           # Root component
-├── scripts/              # Node.js automation scripts
+├── TOOLS/              # Node.js automation scripts
 │   ├── generateSitemap.cjs
 │   ├── generateRSS.cjs
 │   ├── linkedinImport.cjs
@@ -192,13 +192,13 @@ scottkunian.com-v4/
 **Via Scripts**:
 ```bash
 # Import LinkedIn articles
-node scripts/linkedinImport.cjs --dry-run
+node TOOLS/linkedinImport.cjs --dry-run
 
 # Backup all content
-node scripts/backupContent.cjs
+node TOOLS/backupContent.cjs
 
 # Restore from backup
-node scripts/restoreContent.cjs backups/backup-20241005.json
+node TOOLS/restoreContent.cjs backups/backup-20241005.json
 ```
 
 ### Content Types

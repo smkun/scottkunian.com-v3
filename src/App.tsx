@@ -16,6 +16,7 @@ const Nybles = lazy(() => import('./pages/Nybles/Nybles').then(m => ({ default: 
 const FieldNotes = lazy(() => import('./pages/FieldNotes/FieldNotes').then(m => ({ default: m.FieldNotes })));
 const Blog = lazy(() => import('./pages/Blog/Blog').then(m => ({ default: m.Blog })));
 const Articles = lazy(() => import('./pages/Articles/Articles').then(m => ({ default: m.Articles })));
+const Gallery = lazy(() => import('./pages/Gallery/Gallery').then(m => ({ default: m.Gallery })));
 const Contact = lazy(() => import('./pages/Contact/Contact').then(m => ({ default: m.Contact })));
 const AdminDashboard = lazy(() => import('./admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const AdminLogin = lazy(() => import('./pages/admin/Login').then(m => ({ default: m.AdminLogin })));
@@ -86,6 +87,7 @@ function App() {
                       <Route path="/field-notes" element={<FieldNotes />} />
                       <Route path="/blog/*" element={<Blog />} />
                       <Route path="/articles" element={<Articles />} />
+                      <Route path="/gallery/*" element={<Gallery />} />
                       <Route path="/contact" element={<Contact />} />
                     </Routes>
                   </Suspense>

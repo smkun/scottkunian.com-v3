@@ -125,6 +125,33 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Galleries collection rules
+    match /galleries/{galleryId} {
+      // Allow public queries (list operation)
+      allow list: if true;
+
+      // Individual document read access for visible galleries or admin
+      allow get: if resource.data.isVisible == true || isAdmin();
+
+      // Admin write access with validation
+      allow create: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'name', 'slug', 'folderPath', 'isVisible', 'sortOrder', 'createdAt', 'updatedAt'
+        ]) &&
+        request.resource.data.name.size() > 0 &&
+        request.resource.data.slug.size() > 0 &&
+        request.resource.data.folderPath.size() > 0 &&
+        request.resource.data.isVisible is bool &&
+        request.resource.data.sortOrder is number;
+
+      allow update: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'name', 'slug', 'folderPath', 'isVisible', 'sortOrder', 'updatedAt'
+        ]);
+
+      allow delete: if isAdmin();
+    }
+
     // Deny all other document access
     match /{document=**} {
       allow read, write: if false;

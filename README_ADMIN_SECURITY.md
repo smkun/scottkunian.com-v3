@@ -23,7 +23,7 @@ This project now implements **production-ready Firebase admin role security** us
    - Deployed to Firebase: `firebase deploy --only firestore:rules` ✅
 
 4. **Admin Setup Tools**
-   - `scripts/setAdminClaim.js` - One-time setup script
+   - `TOOLS/setAdminClaim.js` - One-time setup script
    - `docs/ADMIN_SETUP.md` - Comprehensive setup guide
 
 ## Next Steps: Admin Access Setup
@@ -39,7 +39,7 @@ This project now implements **production-ready Firebase admin role security** us
 **Quick Setup**:
 1. Download Firebase service account key from [Firebase Console](https://console.firebase.google.com/project/scottkunian-website/settings/serviceaccounts/adminsdk)
 2. Save as `firebase-service-account.json` in project root
-3. Run: `node scripts/setAdminClaim.js`
+3. Run: `node TOOLS/setAdminClaim.js`
 4. Sign out and sign in again in the app
 
 ## Security Benefits
@@ -60,7 +60,7 @@ This project now implements **production-ready Firebase admin role security** us
 - [`src/lib/auth.ts`](src/lib/auth.ts) - Admin verification functions
 - [`src/components/auth/ProtectedRoute.tsx`](src/components/auth/ProtectedRoute.tsx) - AdminRoute enforcement
 - [`firestore.rules`](firestore.rules) - Admin claim validation (deployed ✅)
-- [`scripts/setAdminClaim.js`](scripts/setAdminClaim.js) - Setup script (new)
+- [`TOOLS/setAdminClaim.js`](TOOLS/setAdminClaim.js) - Setup script (new)
 - [`docs/ADMIN_SETUP.md`](docs/ADMIN_SETUP.md) - Setup guide (new)
 
 ## Testing Admin Access

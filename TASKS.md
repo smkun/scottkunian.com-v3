@@ -152,7 +152,7 @@
 
 - [x] **Implement** scheduled LinkedIn import automation
       _Completed: 2025-10-05_
-      <!-- Created scripts/linkedinImport.cjs with RapidAPI integration -->
+      <!-- Created TOOLS/linkedinImport.cjs with RapidAPI integration -->
       <!-- Supports manual, scheduled, and dry-run modes -->
       <!-- Comprehensive error handling and duplicate detection -->
       <!-- Documentation: docs/LINKEDIN_IMPORT_SETUP.md -->
@@ -222,7 +222,7 @@
 
 - [ ] **Migrate** existing Field Notes content to Firestore
       _Priority: Medium | Estimated: 2 hours_
-      <!-- Script ready: scripts/migrateFieldNotes.js -->
+      <!-- Script ready: TOOLS/migrateFieldNotes.js -->
 
 - [x] **Setup** CI/CD pipeline for iFastNet deployment
       _Completed: 2025-10-05_
@@ -252,7 +252,7 @@
 
 - [x] **Create** migration script for Field Notes to Firestore
       _Completed: 2025-10-05_
-      <!-- Script ready: scripts/migrateFieldNotes.js with dry-run support -->
+      <!-- Script ready: TOOLS/migrateFieldNotes.js with dry-run support -->
 
 - [ ] **Backup** current website files and content
       _Priority: High | Estimated: 15 minutes_
@@ -400,7 +400,7 @@
 
 - [x] **Create** content backup and export functionality
       _Completed: 2025-10-05_
-      <!-- Created scripts/backupContent.cjs and scripts/restoreContent.cjs -->
+      <!-- Created TOOLS/backupContent.cjs and TOOLS/restoreContent.cjs -->
       <!-- Full Firestore backup with timestamp serialization, dry-run support -->
       <!-- Manifest generation, batch processing, error handling -->
 
@@ -411,12 +411,12 @@
 
 - [x] **Add** RSS feed generation for blog posts
       _Completed: 2025-10-05_
-      <!-- Created scripts/generateRSS.cjs with RSS 2.0 specification -->
+      <!-- Created TOOLS/generateRSS.cjs with RSS 2.0 specification -->
       <!-- Includes proper RFC 822 date formatting and XML escaping -->
 
 - [x] **Build** sitemap generation for SEO
       _Completed: 2025-10-05_
-      <!-- Created scripts/generateSitemap.cjs with dynamic route support -->
+      <!-- Created TOOLS/generateSitemap.cjs with dynamic route support -->
       <!-- Includes priority and changefreq configuration -->
 
 ### Documentation Tasks
@@ -467,7 +467,7 @@
 3. [ ] **Execute** Field Notes content migration to Firestore
        _Priority: Medium | Estimated: 2 hours_
        _Milestone: M5 Content Migration_
-       <!-- Script ready (scripts/migrateFieldNotes.js), need to prepare data source and run -->
+       <!-- Script ready (TOOLS/migrateFieldNotes.js), need to prepare data source and run -->
 
 4. [ ] **Perform** final QA testing across all features
        _Priority: High | Estimated: 1 hour_
@@ -527,13 +527,13 @@
         _Priority: Critical | Estimated: 2 hours_
         _Completed: 2025-10-01_
         <!-- Implemented real custom claims verification in auth.ts, AdminRoute, and Firestore rules -->
-        <!-- Created setup script (scripts/setAdminClaim.js) and documentation (docs/ADMIN_SETUP.md) -->
+        <!-- Created setup script (TOOLS/setAdminClaim.js) and documentation (docs/ADMIN_SETUP.md) -->
         <!-- Deployed Firestore security rules with admin token validation -->
 
 15. [ ] **Download** Firebase service account key and set admin claim for scottkunian@gmail.com
         _Priority: Critical | Estimated: 30 minutes_
         _Status: NEXT PRIORITY - BLOCKING_
-        <!-- Run: node scripts/setAdminClaim.js after downloading service account JSON -->
+        <!-- Run: node TOOLS/setAdminClaim.js after downloading service account JSON -->
         <!-- Required for admin panel access - see docs/ADMIN_SETUP.md for instructions -->
         <!-- Firebase project: scottkunian-website configured and ready -->
 
@@ -550,7 +550,7 @@
 18. [x] **Create** Field Notes migration script
         _Priority: High | Estimated: 2 hours_
         _Completed: 2025-10-05_
-        <!-- Created scripts/migrateFieldNotes.js with dry-run support -->
+        <!-- Created TOOLS/migrateFieldNotes.js with dry-run support -->
 
 19. [x] **Research** LinkedIn article scraping approaches
         _Priority: Medium | Estimated: 2-3 hours_

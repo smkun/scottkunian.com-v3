@@ -951,7 +951,7 @@ Total: ~192 kB gzipped
    - Deployed security rules to Firebase: `firebase deploy --only firestore:rules`
 
 4. **✅ Admin Setup Infrastructure** (Production Critical)
-   - Created `scripts/setAdminClaim.js` for one-time admin claim setup
+   - Created `TOOLS/setAdminClaim.js` for one-time admin claim setup
    - Built comprehensive documentation in `docs/ADMIN_SETUP.md`
    - Added `firebase-service-account.json` to `.gitignore` for security
    - Provided multiple setup methods (script, console, Cloud Functions)
@@ -997,7 +997,7 @@ allow create, update, delete: if isAdmin();
 
 **Admin Setup Script**:
 ```javascript
-// scripts/setAdminClaim.js
+// TOOLS/setAdminClaim.js
 const user = await admin.auth().getUserByEmail('scottkunian@gmail.com');
 await admin.auth().setCustomUserClaims(user.uid, { admin: true });
 ```
@@ -1023,7 +1023,7 @@ To enable admin access, the user needs to:
 1. Download Firebase service account key from Firebase Console
 2. Save as `firebase-service-account.json` in project root
 3. Install Firebase Admin SDK: `npm install firebase-admin`
-4. Run setup script: `node scripts/setAdminClaim.js`
+4. Run setup script: `node TOOLS/setAdminClaim.js`
 5. Sign out and sign in again to refresh token
 
 **Detailed instructions**: `docs/ADMIN_SETUP.md`
@@ -1074,7 +1074,7 @@ To enable admin access, the user needs to:
 ### 🔄 Files Created/Modified
 
 **New Files**:
-- `/scripts/setAdminClaim.js` (45 lines) - Admin claim setup script
+- `/TOOLS/setAdminClaim.js` (45 lines) - Admin claim setup script
 - `/docs/ADMIN_SETUP.md` (250 lines) - Comprehensive admin setup guide
 - `/functions/` directory structure - Firebase Functions scaffold (optional for production)
 
@@ -1782,7 +1782,7 @@ Database Type: FIRESTORE_NATIVE
 1. **Set Admin Custom Claim** (30 minutes - BLOCKING)
    - Download Firebase service account key from Console
    - Install `firebase-admin` package: `npm install firebase-admin`
-   - Run setup script: `node scripts/setAdminClaim.js`
+   - Run setup script: `node TOOLS/setAdminClaim.js`
    - Sign out and sign in to refresh token
    - **Blocks**: Admin panel access, content management testing
 
@@ -1877,7 +1877,7 @@ Database Type: FIRESTORE_NATIVE
 ### 🎯 Critical Next Steps
 
 1. **User Action** (5 min): Download firebase-service-account.json
-2. **Admin Setup** (2 min): Run node scripts/setAdminClaim.js
+2. **Admin Setup** (2 min): Run node TOOLS/setAdminClaim.js
 3. **Testing** (1 hour): E2E Firebase integration validation
 4. **Migration** (2 hours): Execute Field Notes import
 5. **Deploy** (1 hour): Production deployment to Firebase Hosting
@@ -2091,7 +2091,7 @@ Database Type: FIRESTORE_NATIVE
    - Prepare data source
    - Run migration script with dry-run
    - Execute full migration
-   - Script ready: [scripts/migrateFieldNotes.js](scripts/migrateFieldNotes.js)
+   - Script ready: [TOOLS/migrateFieldNotes.js](TOOLS/migrateFieldNotes.js)
 
 5. **Final QA testing** (High priority)
    - Cross-browser testing
@@ -2242,7 +2242,7 @@ npm run build
      1. Download service account JSON from Firebase Console
      2. Save as `firebase-service-account.json` in project root
      3. Install Firebase Admin SDK: `npm install firebase-admin`
-     4. Run setup script: `node scripts/setAdminClaim.js`
+     4. Run setup script: `node TOOLS/setAdminClaim.js`
      5. Sign out and sign in to refresh token
    - **Blocks**: Admin panel access, E2E testing, content management workflow validation
    - **Impact**: Without this, cannot test or use admin features
@@ -3332,8 +3332,8 @@ Total: ~196 KB gzipped (stable)
 
 - src/lib/firestore.ts - Added getArticles fallback query logic
 - src/pages/Articles/Articles.tsx - Complete UI redesign with 2-column grid
-- scripts/importLinkedInArticles.cjs (NEW) - Manual article import
-- scripts/checkArticleOrder.cjs (NEW) - Order verification
+- TOOLS/importLinkedInArticles.cjs (NEW) - Manual article import
+- TOOLS/checkArticleOrder.cjs (NEW) - Order verification
 - /public/images/articles/ - 8 PNG article cover images copied
 
 ### 🎯 Current Status
@@ -3391,11 +3391,11 @@ Total: ~196 KB gzipped (stable)
 ### �� Technical Implementations
 
 **Project Import Scripts Created**:
-- `scripts/importOldSiteProjects.cjs` - Code collection projects (6 GitHub repos)
-- `scripts/importLiveGames.cjs` - Live games/apps (7 playable projects)
-- `scripts/add32Gamers.cjs` - Gaming club website
-- `scripts/update802SoulKitchen.cjs` - Tech stack correction
-- `scripts/verifyProjects.cjs` - Database validation tool
+- `TOOLS/importOldSiteProjects.cjs` - Code collection projects (6 GitHub repos)
+- `TOOLS/importLiveGames.cjs` - Live games/apps (7 playable projects)
+- `TOOLS/add32Gamers.cjs` - Gaming club website
+- `TOOLS/update802SoulKitchen.cjs` - Tech stack correction
+- `TOOLS/verifyProjects.cjs` - Database validation tool
 
 **Database Structure**:
 ```javascript
@@ -3464,12 +3464,12 @@ const navigation = [
 ### 📊 Files Created/Modified
 
 **New Scripts (6)**:
-- `scripts/importOldSiteProjects.cjs` (120 lines)
-- `scripts/importLiveGames.cjs` (150 lines)
-- `scripts/add32Gamers.cjs` (50 lines)
-- `scripts/update802SoulKitchen.cjs` (45 lines)
-- `scripts/verifyProjects.cjs` (60 lines)
-- `scripts/checkArticleOrder.cjs` (45 lines - from previous session)
+- `TOOLS/importOldSiteProjects.cjs` (120 lines)
+- `TOOLS/importLiveGames.cjs` (150 lines)
+- `TOOLS/add32Gamers.cjs` (50 lines)
+- `TOOLS/update802SoulKitchen.cjs` (45 lines)
+- `TOOLS/verifyProjects.cjs` (60 lines)
+- `TOOLS/checkArticleOrder.cjs` (45 lines - from previous session)
 
 **Modified Files (3)**:
 - `src/components/layout/Header.tsx` - Navigation cleanup
@@ -4031,3 +4031,343 @@ All TypeScript compilation clean
 ---
 
 > Updated 2025-10-06 | Glassmorphism site-wide, header/footer enhanced, social icons unified ✅✨🎨
+
+## Session Summary - 2025-10-06 (Gallery Feature Implementation)
+
+**Duration**: ~2 hours
+**Focus**: Photo Gallery Feature Development
+**Session Type**: New Feature Implementation
+
+### 🎯 Tasks Completed
+
+1. **✅ Gallery Data Model** - Added GalleryCategory interface to [firestore.ts](src/lib/firestore.ts)
+2. **✅ Admin Gallery Manager** - Created [GalleryManager.tsx](src/admin/GalleryManager.tsx) with CRUD operations
+3. **✅ Public Gallery Pages** - Built [Gallery.tsx](src/pages/Gallery/Gallery.tsx) with list and individual views
+4. **✅ Navigation Integration** - Added "Gallery" link to [Header.tsx](src/components/layout/Header.tsx)
+5. **✅ Admin Dashboard Integration** - Updated [AdminDashboard.tsx](src/admin/AdminDashboard.tsx) with Gallery routes and counter
+6. **✅ Image Scanner Script** - Created [scanGalleryImages.cjs](TOOLS/scanGalleryImages.cjs) for automated image counting
+7. **✅ Gallery Setup Guide** - Comprehensive documentation in [GALLERY_SETUP.md](docs/GALLERY_SETUP.md)
+
+### 🔧 Technical Implementation
+
+**Data Model** ([src/lib/firestore.ts](src/lib/firestore.ts)):
+```typescript
+interface GalleryCategory {
+  id?: string;
+  name: string;           // "Asia Trip", "Pets", "Miniatures"
+  slug: string;           // URL-friendly identifier
+  folderPath: string;     // Folder in /public/images/gallery/
+  description?: string;
+  coverImage?: string;    // Featured thumbnail
+  imageCount?: number;    // Cached count
+  isVisible: boolean;     // Public visibility
+  sortOrder: number;      // Display order
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+```
+
+**Admin Interface** ([src/admin/GalleryManager.tsx](src/admin/GalleryManager.tsx)):
+- CategoryList: Browse, search, edit, delete categories
+- CategoryEditor: Create/edit form with validation
+- Visibility toggle for show/hide control
+- Sort ordering for display customization
+- Image count display
+
+**Public Gallery** ([src/pages/Gallery/Gallery.tsx](src/pages/Gallery/Gallery.tsx)):
+- GalleryList: Grid of category cards with cover images
+- GalleryView: Individual gallery with image grid
+- Lightbox modal for full-size viewing
+- Responsive design with glassmorphism effect
+
+**Folder Structure**:
+```
+public/images/gallery/
+├── AsiaTrip/          ← Ready for images
+├── Pets/              ← Future gallery
+└── Miniatures/        ← Future gallery
+```
+
+### 🚨 Issues Fixed
+
+1. **TypeScript Error**: Fixed ConfirmDialog prop (`message` → `description`)
+2. **Unused Variable**: Removed `imagePath` declaration in GalleryView
+3. **Build Verification**: Confirmed all TypeScript compilation successful
+
+### 📊 Files Created/Modified
+
+**New Files (3)**:
+- [src/pages/Gallery/Gallery.tsx](src/pages/Gallery/Gallery.tsx) - Public gallery pages
+- [TOOLS/scanGalleryImages.cjs](TOOLS/scanGalleryImages.cjs) - Image scanner utility
+- [docs/GALLERY_SETUP.md](docs/GALLERY_SETUP.md) - Setup documentation
+
+**Modified Files (4)**:
+- [src/lib/firestore.ts](src/lib/firestore.ts) - Added GalleryCategory model and functions
+- [src/admin/GalleryManager.tsx](src/admin/GalleryManager.tsx) - Admin CRUD interface
+- [src/admin/AdminDashboard.tsx](src/admin/AdminDashboard.tsx) - Gallery routes and counter
+- [src/components/layout/Header.tsx](src/components/layout/Header.tsx) - Gallery navigation link
+- [src/App.tsx](src/App.tsx) - Gallery route integration
+
+**Build Status**: ✅ Successful
+```
+dist/assets/Gallery-f973bc89.js    5.24 kB │ gzip: 1.67 kB
+Total bundle: ~197 KB gzipped
+```
+
+### 🎯 Next Steps for User
+
+1. **Add Images to AsiaTrip Folder**:
+   ```bash
+   cp /path/to/asia-photos/* public/images/gallery/AsiaTrip/
+   ```
+
+2. **Create Category in Admin Panel**:
+   - Navigate to: http://localhost:3000/admin/gallery
+   - Click "Add New Category"
+   - Name: "Asia Trip"
+   - Folder Path: "AsiaTrip"
+   - Add description and save
+
+3. **Scan Images**:
+   ```bash
+   node TOOLS/scanGalleryImages.cjs
+   ```
+
+4. **View Gallery**:
+   - Gallery list: http://localhost:3000/gallery
+   - Asia Trip: http://localhost:3000/gallery/asia-trip
+
+### 💡 Key Features
+
+**Admin Capabilities**:
+- ✅ Create/edit/delete gallery categories
+- ✅ Set folder paths for image storage
+- ✅ Control visibility and display order
+- ✅ Search and filter categories
+- ✅ View image counts
+
+**Public Gallery**:
+- ✅ Responsive grid layout
+- ✅ Category cards with cover images
+- ✅ Individual gallery views
+- ✅ Lightbox for full-size images
+- ✅ Glassmorphism design matching site aesthetic
+
+**Image Management**:
+- ✅ File system-based (images in /public/images/gallery/)
+- ✅ Automatic image counting via script
+- ✅ Auto-set cover images
+- ✅ Support for JPG, PNG, GIF, WebP, AVIF
+
+### 📊 Progress Status
+
+**Gallery Feature**: 85% complete
+- ✅ Data model implemented
+- ✅ Admin interface complete
+- ✅ Public pages created
+- ✅ Navigation integrated
+- ✅ Image scanner ready
+- ⏳ Awaiting Asia Trip images from user
+- ⏳ Category creation needed
+
+**Technical Debt**: Minimal - clean implementation following existing patterns
+
+**Performance**: Production-ready - lazy loaded routes, optimized bundle
+
+---
+
+> Updated 2025-10-06 | Gallery feature implemented, ready for Asia Trip images 📸✨
+
+
+## Session Summary - 2025-10-06 (Asia Trip Gallery Complete)
+
+**Duration**: ~3 hours
+**Focus**: Asia Trip Gallery Integration - 535 Photos Across 38 Locations
+**Session Type**: Content Migration & Enhanced Gallery Implementation
+
+### 🎯 Tasks Completed
+
+1. **✅ Discovered Existing AsiaTrip Folder** - Found complete gallery with 535 WebP images
+2. **✅ Analyzed Gallery Structure** - 38 location folders with photo_data.json metadata
+3. **✅ Copied All Images** - Migrated 535 images to `/public/images/gallery/AsiaTrip/`
+4. **✅ Generated locations.json** - Created structured metadata for all 38 locations
+5. **✅ Enhanced Gallery Component** - Built location-based navigation system
+6. **✅ Created Setup Scripts** - Image scanner and location generator tools
+7. **✅ Comprehensive Documentation** - Complete setup guide in ASIA_TRIP_GALLERY_GUIDE.md
+
+### 📊 Asia Trip Gallery Stats
+
+- **Total Images**: 535 photos in WebP format
+- **Locations**: 38 unique locations across China and Japan
+- **Countries**: China and Japan
+- **Date**: 2025 March (202503)
+- **Organization**: Location-based with sub-folders
+- **File Size**: Optimized WebP compression
+
+### 🔧 Technical Implementation
+
+**Image Migration**:
+```bash
+# Copied from project folder to public gallery
+cp -r AsiaTrip/images/* public/images/gallery/AsiaTrip/
+# Result: 535 images across 38 location folders
+```
+
+**locations.json Generation** ([TOOLS/generateAsiaImageList.cjs](TOOLS/generateAsiaImageList.cjs)):
+```javascript
+{
+  "totalLocations": 38,
+  "totalImages": 535,
+  "locations": [
+    {
+      "folder": "202503_AirChina",
+      "displayName": "Air China",
+      "images": [...],
+      "imageCount": 6,
+      "coverImage": "/images/gallery/AsiaTrip/202503_AirChina/FUNT0733.webp"
+    },
+    // ... 37 more locations
+  ]
+}
+```
+
+**Enhanced Gallery Component** ([src/pages/Gallery/Gallery.tsx](src/pages/Gallery/Gallery.tsx)):
+- **Three-level navigation**: Galleries → Locations → Photos
+- **Location detection**: Automatically loads locations.json for structured galleries
+- **Responsive grids**: 1-4 columns based on screen size
+- **Interactive lightbox**: Full-size image viewing
+- **State management**: Tracks selected location and image
+- **TypeScript types**: Full type safety for Location and LocationsData interfaces
+
+### 📁 Folder Structure
+
+```
+public/images/gallery/AsiaTrip/
+├── locations.json (38 locations, 535 photos)
+├── 202503_AirChina/ (6 photos)
+├── 202503_Asakusa-1-chome_Taitung-District_Japan/ (5 photos)
+├── 202503_Asakusa-2-chome_Taitung-District_Japan/ (20 photos)
+└── ... (35 more location folders)
+```
+
+### 🎨 User Experience Flow
+
+```
+1. /gallery
+   └─> Gallery List: Shows "Asia Trip" card with cover image
+
+2. /gallery/asia-trip
+   └─> Location Grid: 38 location cards in responsive grid
+
+3. Click location (e.g., "Asakusa 2-chome")
+   └─> Photo Grid: 20 photos from that location
+
+4. Click photo
+   └─> Lightbox: Full-size image with close button
+```
+
+### 📊 Build Status
+
+**✅ Production Build Successful**
+```
+dist/assets/Gallery-602acd3b.js    7.62 kB │ gzip: 2.02 kB
+Total bundle: ~198 KB gzipped (+1 KB for gallery features)
+```
+
+### 🚀 Final Setup Required
+
+**Single Step Remaining**: Create gallery category in admin panel
+
+1. Visit: http://localhost:3000/admin/gallery
+2. Click "Add New Category"
+3. Fill in:
+   - Name: "Asia Trip"
+   - Folder Path: "AsiaTrip"
+   - Description: "2025 journey through China and Japan - 38 locations, 535 photos"
+   - Sort Order: 0
+   - Visible: ✓
+4. Save
+
+Then view at: http://localhost:3000/gallery/asia-trip
+
+### 📚 Documentation Created
+
+**Files Created**:
+- [docs/GALLERY_SETUP.md](docs/GALLERY_SETUP.md) - General gallery feature guide
+- [docs/ASIA_TRIP_GALLERY_GUIDE.md](docs/ASIA_TRIP_GALLERY_GUIDE.md) - Complete Asia Trip setup guide
+- [TOOLS/generateAsiaImageList.cjs](TOOLS/generateAsiaImageList.cjs) - Location metadata generator
+- [TOOLS/scanGalleryImages.cjs](TOOLS/scanGalleryImages.cjs) - Image counting utility
+- [TOOLS/createAsiaTripGallery.cjs](TOOLS/createAsiaTripGallery.cjs) - Firestore category creator (requires auth)
+
+### 💡 Key Features
+
+**Location-Based Navigation**:
+- Browse 38 locations as cards with cover images
+- Click location to see all photos from that place
+- Badge counters show location count and photo count
+
+**Enhanced Viewing**:
+- Responsive grid layouts (1-4 columns)
+- Hover effects with image scaling
+- Lightbox modal for full-size viewing
+- Back navigation at each level
+
+**Smart Data Loading**:
+- Detects if gallery has locations.json
+- Falls back to simple view for non-structured galleries
+- TypeScript-safe data handling
+
+**Glassmorphism Design**:
+- Matches home page aesthetic
+- Gradient text for headings
+- Smooth transitions and animations
+
+### 🎯 Sample Locations
+
+1. **Air China** - 6 photos
+2. **Asakusa 1-chome, Taitung District, Japan** - 5 photos
+3. **Asakusa 2-chome, Taitung District, Japan** - 20 photos
+4. **Asian Games Village Street, Chaoyang District, Beijing, China** - 4 photos
+5. **Chadao Village, Yanqing District, Beijing, China** - 16 photos
+6. ... and 33 more locations
+
+### 🔄 Scripts Available
+
+**Generate Location Metadata**:
+```bash
+node TOOLS/generateAsiaImageList.cjs
+# Scans AsiaTrip folder and creates locations.json
+```
+
+**Scan All Gallery Images**:
+```bash
+node TOOLS/scanGalleryImages.cjs
+# Updates imageCount for all gallery categories
+```
+
+### 🎉 Gallery Feature Status
+
+**Complete**:
+- ✅ Gallery data model and Firestore integration
+- ✅ Admin management interface (CRUD operations)
+- ✅ Public gallery listing page
+- ✅ Enhanced gallery viewer with location support
+- ✅ Navigation integration (Gallery link in header)
+- ✅ All 535 Asia Trip images copied and organized
+- ✅ locations.json generated with full metadata
+- ✅ Comprehensive documentation
+
+**Pending** (1 step):
+- ⏳ Create "Asia Trip" category via admin panel (manual step)
+
+### 📊 Progress Summary
+
+**Gallery Feature**: 95% complete (awaiting category creation)
+**Asia Trip Migration**: 100% complete (all images ready)
+**Documentation**: 100% complete (setup guides created)
+**Build**: ✅ Successful - production ready
+
+---
+
+> Updated 2025-10-06 | Asia Trip Gallery: 535 photos, 38 locations, ready to view 🌏📸✨
+

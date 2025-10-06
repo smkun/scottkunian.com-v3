@@ -10,7 +10,8 @@ import { PostsManager } from './PostsManager';
 import { NotesManager } from './NotesManager';
 import { ProjectsManager } from './ProjectsManager';
 import { ArticlesManager } from './ArticlesManager';
-import { getProjects, getNotes, getArticles } from '../lib/firestore';
+import { GalleryManager } from './GalleryManager';
+import { getProjects, getNotes, getArticles, getGalleryCategories } from '../lib/firestore';
 
 export function AdminDashboard() {
   const { user } = useAuth();
@@ -31,19 +32,24 @@ export function AdminDashboard() {
       current: location.pathname === '/admin' || location.pathname === '/admin/'
     },
     {
+      name: 'Field Notes',
+      href: '/admin/articles',
+      current: location.pathname.startsWith('/admin/articles')
+    },
+    {
       name: 'Projects',
       href: '/admin/projects',
       current: location.pathname.startsWith('/admin/projects')
     },
     {
+      name: 'Gallery',
+      href: '/admin/gallery',
+      current: location.pathname.startsWith('/admin/gallery')
+    },
+    {
       name: 'Nybles',
       href: '/admin/notes',
       current: location.pathname.startsWith('/admin/notes')
-    },
-    {
-      name: 'Field Notes',
-      href: '/admin/articles',
-      current: location.pathname.startsWith('/admin/articles')
     },
     {
       name: 'Settings',
@@ -116,6 +122,7 @@ export function AdminDashboard() {
             <Route path="/" element={<AdminHome />} />
             <Route path="/posts/*" element={<PostsManager />} />
             <Route path="/projects/*" element={<ProjectsManager />} />
+            <Route path="/gallery/*" element={<GalleryManager />} />
             <Route path="/notes/*" element={<NotesManager />} />
             <Route path="/articles/*" element={<ArticlesManager />} />
             <Route path="/settings" element={<div>Settings coming soon...</div>} />
@@ -129,6 +136,7 @@ export function AdminDashboard() {
 function AdminHome() {
   const [counts, setCounts] = useState({
     projects: 0,
+    galleries: 0,
     nybles: 0,
     fieldNotes: 0
   });
@@ -140,14 +148,16 @@ function AdminHome() {
 
   const loadCounts = async () => {
     try {
-      const [projects, notes, articles] = await Promise.all([
-        getProjects(false), // Get all projects (not just public)
-        getNotes(false),    // Get all nybles
-        getArticles(false)  // Get all field notes
+      const [projects, galleries, notes, articles] = await Promise.all([
+        getProjects(false),          // Get all projects (not just public)
+        getGalleryCategories(false), // Get all gallery categories
+        getNotes(false),             // Get all nybles
+        getArticles(false)           // Get all field notes
       ]);
 
       setCounts({
         projects: projects.length,
+        galleries: galleries.length,
         nybles: notes.length,
         fieldNotes: articles.length
       });
@@ -160,21 +170,27 @@ function AdminHome() {
 
   const quickActions = [
     {
+      title: 'Manage Field Notes',
+      description: 'Manage LinkedIn articles and field notes',
+      href: '/admin/articles',
+      status: 'Active'
+    },
+    {
       title: 'Manage Projects',
       description: 'Add and update portfolio projects',
       href: '/admin/projects',
       status: 'Active'
     },
     {
-      title: 'Add Nyble',
-      description: 'Share a quick thought or story',
-      href: '/admin/notes/new',
+      title: 'Manage Gallery',
+      description: 'Create and organize photo galleries',
+      href: '/admin/gallery',
       status: 'Active'
     },
     {
-      title: 'Manage Field Notes',
-      description: 'Manage LinkedIn articles and field notes',
-      href: '/admin/articles',
+      title: 'Add Nyble',
+      description: 'Share a quick thought or story',
+      href: '/admin/notes/new',
       status: 'Active'
     }
   ];
@@ -192,6 +208,18 @@ function AdminHome() {
               {loading ? '...' : counts.projects}
             </div>
             <p className="text-xs text-muted-foreground">Live and ready</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Gallery Categories</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {loading ? '...' : counts.galleries}
+            </div>
+            <p className="text-xs text-muted-foreground">Photo collections</p>
           </CardContent>
         </Card>
 
@@ -269,7 +297,7 @@ function AdminHome() {
             <div className="flex items-center gap-2">
               <Badge variant="accent">✅ Firestore</Badge>
               <span className="text-sm text-muted-foreground">
-                Database connected ({counts.projects + counts.nybles + counts.fieldNotes} documents)
+                Database connected ({counts.projects + counts.galleries + counts.nybles + counts.fieldNotes} documents)
               </span>
             </div>
             <div className="flex items-center gap-2">

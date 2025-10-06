@@ -29,7 +29,7 @@ You need to download a Firebase service account key to grant yourself admin acce
 Once the file is in place, run:
 
 ```bash
-node scripts/setAdminClaim.js
+node TOOLS/setAdminClaim.js
 ```
 
 **Expected Output**:

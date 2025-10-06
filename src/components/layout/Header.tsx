@@ -20,6 +20,7 @@ export function Header({ onThemeChange, onEffectChange, currentTheme = 'purple',
     { name: 'About', href: '/about' },
     { name: 'Field Notes', href: '/articles' },
     { name: 'Projects', href: '/projects' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Nybles', href: '/nybles' },
     { name: 'Get in Touch', href: '/contact' },
   ];

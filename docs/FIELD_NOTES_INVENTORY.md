@@ -136,7 +136,7 @@ function classifyNoteType(content, title = '', tags = []) {
 
 ## Migration Script Status
 
-**Script**: [scripts/migrateFieldNotes.js](../scripts/migrateFieldNotes.js)
+**Script**: [TOOLS/migrateFieldNotes.js](../TOOLS/migrateFieldNotes.js)
 
 **Features**:
 - ✅ Dry-run mode for testing
@@ -240,12 +240,12 @@ const migrationConfig = {
 
 ```bash
 # Step 1: Dry-run to test (no actual writes)
-node scripts/migrateFieldNotes.js --source ./backups/field-notes-original/ --dry-run
+node TOOLS/migrateFieldNotes.js --source ./backups/field-notes-original/ --dry-run
 
 # Step 2: Review dry-run output, verify data looks correct
 
 # Step 3: Execute actual migration
-node scripts/migrateFieldNotes.js --source ./backups/field-notes-original/
+node TOOLS/migrateFieldNotes.js --source ./backups/field-notes-original/
 
 # Step 4: Verify in admin panel
 # Visit: http://localhost:3003/admin/notes
@@ -356,7 +356,7 @@ node scripts/migrateFieldNotes.js --source ./backups/field-notes-original/
 2. ✅ Backup created
 3. ✅ Format/structure confirmed
 
-**Script Status**: ✅ Ready ([scripts/migrateFieldNotes.js](../scripts/migrateFieldNotes.js))
+**Script Status**: ✅ Ready ([TOOLS/migrateFieldNotes.js](../TOOLS/migrateFieldNotes.js))
 
 **Next Step**: User provides source data → execute migration
 

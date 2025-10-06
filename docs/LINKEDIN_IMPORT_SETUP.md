@@ -42,20 +42,20 @@ LINKEDIN_PROFILE_URL=https://www.linkedin.com/in/scottkunian/
 
 ```bash
 # Test without writing to Firestore
-node scripts/linkedinImport.cjs --dry-run
+node TOOLS/linkedinImport.cjs --dry-run
 
 # Test with specific profile
-node scripts/linkedinImport.cjs --dry-run https://www.linkedin.com/in/username/
+node TOOLS/linkedinImport.cjs --dry-run https://www.linkedin.com/in/username/
 ```
 
 ### Step 5: Run Manual Import
 
 ```bash
 # Import articles to Firestore
-node scripts/linkedinImport.cjs
+node TOOLS/linkedinImport.cjs
 
 # Or specify profile URL directly
-node scripts/linkedinImport.cjs https://www.linkedin.com/in/scottkunian/
+node TOOLS/linkedinImport.cjs https://www.linkedin.com/in/scottkunian/
 ```
 
 ### Step 6: Approve Articles
@@ -103,16 +103,16 @@ node scripts/linkedinImport.cjs https://www.linkedin.com/in/scottkunian/
 
 ```bash
 # Show help
-node scripts/linkedinImport.cjs --help
+node TOOLS/linkedinImport.cjs --help
 
 # Dry run (preview without writing)
-node scripts/linkedinImport.cjs --dry-run
+node TOOLS/linkedinImport.cjs --dry-run
 
 # Manual import
-node scripts/linkedinImport.cjs <profile-url>
+node TOOLS/linkedinImport.cjs <profile-url>
 
 # Scheduled mode (for cron jobs)
-node scripts/linkedinImport.cjs --scheduled
+node TOOLS/linkedinImport.cjs --scheduled
 ```
 
 ### Data Imported
@@ -161,7 +161,7 @@ Add to crontab:
 
 ```bash
 # Run daily at 2 AM
-0 2 * * * cd /path/to/project && node scripts/linkedinImport.cjs --scheduled >> logs/linkedin-import.log 2>&1
+0 2 * * * cd /path/to/project && node TOOLS/linkedinImport.cjs --scheduled >> logs/linkedin-import.log 2>&1
 ```
 
 ### Option 2: GitHub Actions Workflow
@@ -194,7 +194,7 @@ jobs:
         env:
           RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
           LINKEDIN_PROFILE_URL: ${{ secrets.LINKEDIN_PROFILE_URL }}
-        run: node scripts/linkedinImport.cjs --scheduled
+        run: node TOOLS/linkedinImport.cjs --scheduled
 ```
 
 ### Option 3: Firebase Cloud Functions (Advanced)
@@ -226,7 +226,7 @@ export const scheduledLinkedInSync = functions.pubsub
 
 ```bash
 export RAPIDAPI_KEY=your_api_key_here
-node scripts/linkedinImport.cjs
+node TOOLS/linkedinImport.cjs
 ```
 
 ### Error: "API returned status 401: Unauthorized"

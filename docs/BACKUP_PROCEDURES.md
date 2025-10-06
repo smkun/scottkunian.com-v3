@@ -116,7 +116,7 @@ ls -la > FILE_LIST.txt
 
 ### Automated Firestore Backup Script
 
-**Script**: [scripts/backupContent.cjs](../scripts/backupContent.cjs)
+**Script**: [TOOLS/backupContent.cjs](../TOOLS/backupContent.cjs)
 
 **Features**:
 - ✅ Exports all collections (posts, notes, projects, articles)
@@ -130,13 +130,13 @@ ls -la > FILE_LIST.txt
 **Option A: Using Backup Script**:
 ```bash
 # Full backup of all collections
-node scripts/backupContent.cjs
+node TOOLS/backupContent.cjs
 
 # Backup specific collection
-node scripts/backupContent.cjs --collection posts
+node TOOLS/backupContent.cjs --collection posts
 
 # Dry-run to see what would be backed up
-node scripts/backupContent.cjs --dry-run
+node TOOLS/backupContent.cjs --dry-run
 ```
 
 **Output**:
@@ -172,13 +172,13 @@ gsutil ls gs://[your-bucket]/firestore-backups/
 **Using Restore Script**:
 ```bash
 # Restore from backup directory
-node scripts/restoreContent.cjs backups/firestore-20251005-120000/
+node TOOLS/restoreContent.cjs backups/firestore-20251005-120000/
 
 # Dry-run to see what would be restored
-node scripts/restoreContent.cjs backups/firestore-20251005-120000/ --dry-run
+node TOOLS/restoreContent.cjs backups/firestore-20251005-120000/ --dry-run
 
 # Restore specific collection only
-node scripts/restoreContent.cjs backups/firestore-20251005-120000/ --collection posts
+node TOOLS/restoreContent.cjs backups/firestore-20251005-120000/ --collection posts
 ```
 
 **Using Firebase CLI**:
@@ -218,7 +218,7 @@ gsutil -m cp -r gs://[your-project].appspot.com/images/ ./backups/images/
 ### Storage Backup Script
 
 ```javascript
-// scripts/backupStorage.js
+// TOOLS/backupStorage.js
 const admin = require('firebase-admin');
 const fs = require('fs');
 const path = require('path');
@@ -253,7 +253,7 @@ backupStorage().catch(console.error);
 
 **Run**:
 ```bash
-node scripts/backupStorage.js
+node TOOLS/backupStorage.js
 ```
 
 ### Restore Storage Files
@@ -366,7 +366,7 @@ cp .env.example .env
 
 ```bash
 # Using restore script
-node scripts/restoreContent.cjs ~/Backups/firestore-20251005-120000/
+node TOOLS/restoreContent.cjs ~/Backups/firestore-20251005-120000/
 
 # Or using Firebase CLI
 firebase firestore:import gs://backup-bucket/firestore-backup-20251005
@@ -447,7 +447,7 @@ firebase deploy --only hosting --version [version-id]
 **Firestore Rollback**:
 ```bash
 # Restore from backup (no native rollback)
-node scripts/restoreContent.cjs backups/firestore-[previous-date]/
+node TOOLS/restoreContent.cjs backups/firestore-[previous-date]/
 ```
 
 ---
@@ -459,7 +459,7 @@ node scripts/restoreContent.cjs backups/firestore-[previous-date]/
 **Daily** (Recommended):
 ```bash
 # Add to crontab or GitHub Actions
-0 2 * * * cd /path/to/project && node scripts/backupContent.cjs
+0 2 * * * cd /path/to/project && node TOOLS/backupContent.cjs
 ```
 
 **GitHub Actions Workflow** (`.github/workflows/backup.yml`):
@@ -480,7 +480,7 @@ jobs:
         with:
           node-version: '18'
       - run: npm install
-      - run: node scripts/backupContent.cjs
+      - run: node TOOLS/backupContent.cjs
       - uses: actions/upload-artifact@v3
         with:
           name: firestore-backup

@@ -31,7 +31,7 @@ The application uses Firebase custom claims to control admin access. Only users 
 
 3. **Run the setup script**:
    ```bash
-   node scripts/setAdminClaim.js
+   node TOOLS/setAdminClaim.js
    ```
 
 4. **Verify output**:
@@ -133,7 +133,7 @@ All write operations to collections (`posts`, `projects`, `notes`, `articles`) r
 
 **To add more admins**: Modify the `AUTHORIZED_ADMIN_EMAIL` constant in:
 - `functions/src/index.ts` (if using Cloud Functions)
-- `scripts/setAdminClaim.js` (if using script)
+- `TOOLS/setAdminClaim.js` (if using script)
 
 ## Production Deployment
 
@@ -157,7 +157,7 @@ For production, it's recommended to:
 To remove admin access:
 
 ```bash
-node scripts/removeAdminClaim.js
+node TOOLS/removeAdminClaim.js
 ```
 
 Or manually via Firebase Admin SDK:
@@ -172,7 +172,7 @@ admin.auth().setCustomUserClaims(userUid, { admin: false });
 - `src/components/auth/ProtectedRoute.tsx` - Real admin role enforcement in `AdminRoute`
 - `firestore.rules` - Custom claims validation in `isAdmin()` function
 - `functions/src/index.ts` - Admin claim management Cloud Functions
-- `scripts/setAdminClaim.js` - One-time setup script
+- `TOOLS/setAdminClaim.js` - One-time setup script
 
 ## Next Steps
 
