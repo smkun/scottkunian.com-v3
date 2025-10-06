@@ -16,11 +16,14 @@ service cloud.firestore {
 
     // Posts collection rules
     match /posts/{postId} {
+      // Allow public queries
+      allow list: if true;
+
       // Public read access for published posts
-      allow read: if resource.data.published == true;
+      allow get: if resource.data.published == true;
 
       // Admin read access for all posts (including drafts)
-      allow read: if isAdmin();
+      allow get: if isAdmin();
 
       // Admin write access with validation
       allow create: if isAdmin() &&
@@ -46,11 +49,14 @@ service cloud.firestore {
 
     // Projects collection rules
     match /projects/{projectId} {
+      // Allow public queries
+      allow list: if true;
+
       // Public read access for visible projects
-      allow read: if resource.data.isVisible == true;
+      allow get: if resource.data.isVisible == true;
 
       // Admin read access for all projects
-      allow read: if isAdmin();
+      allow get: if isAdmin();
 
       // Admin write access with validation
       allow create: if isAdmin() &&
@@ -75,11 +81,14 @@ service cloud.firestore {
 
     // Notes collection rules
     match /notes/{noteId} {
+      // Allow public queries
+      allow list: if true;
+
       // Public read access for public notes
-      allow read: if resource.data.isPublic == true;
+      allow get: if resource.data.isPublic == true;
 
       // Admin read access for all notes
-      allow read: if isAdmin();
+      allow get: if isAdmin();
 
       // Admin write access with validation
       allow create: if isAdmin() &&
@@ -101,11 +110,14 @@ service cloud.firestore {
 
     // Articles collection rules
     match /articles/{articleId} {
+      // Allow public queries
+      allow list: if true;
+
       // Public read access for visible articles
-      allow read: if resource.data.isVisible == true;
+      allow get: if resource.data.isVisible == true;
 
       // Admin read access for all articles
-      allow read: if isAdmin();
+      allow get: if isAdmin();
 
       // Admin write access with validation
       allow create: if isAdmin() &&
