@@ -42,11 +42,11 @@ jobs:
           VITE_GA_MEASUREMENT_ID: ${{ secrets.VITE_GA_MEASUREMENT_ID }}
 
       - name: Generate sitemap
-        run: node scripts/generateSitemap.cjs
+        run: node TOOLS/generateSitemap.cjs
         continue-on-error: true
 
       - name: Generate RSS feed
-        run: node scripts/generateRSS.cjs
+        run: node TOOLS/generateRSS.cjs
         continue-on-error: true
 
       - name: Prepare deployment package
