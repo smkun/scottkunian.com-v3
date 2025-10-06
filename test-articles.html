@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Articles - Firestore Connection</title>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <h1>Firestore Articles Test</h1>
+    <div id="output">Loading...</div>
+
+    <script>
+        // Firebase configuration from .env
+        const firebaseConfig = {
+            apiKey: "AIzaSyCG2irgsGcw75QiR3Z1uZfWv-SKxJinh_g",
+            authDomain: "scottkunian-website.firebaseapp.com",
+            projectId: "scottkunian-website",
+            storageBucket: "scottkunian-website.firebasestorage.app",
+            messagingSenderId: "219676854159",
+            appId: "1:219676854159:web:2fa5d4d8ca72b36140adfa"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Fetch articles
+        db.collection('articles')
+            .where('isVisible', '==', true)
+            .orderBy('publishedAt', 'desc')
+            .get()
+            .then((snapshot) => {
+                const output = document.getElementById('output');
+                if (snapshot.empty) {
+                    output.innerHTML = '<p style="color: red;">No articles found!</p>';
+                    return;
+                }
+
+                let html = '<h2>Found ' + snapshot.size + ' articles:</h2><ul>';
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    html += '<li><strong>' + data.title + '</strong><br>';
+                    html += 'URL: ' + data.url + '<br>';
+                    html += 'Source: ' + data.source + '<br>';
+                    html += 'Visible: ' + data.isVisible + '</li><br>';
+                });
+                html += '</ul>';
+                output.innerHTML = html;
+            })
+            .catch((error) => {
+                document.getElementById('output').innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+                console.error('Error fetching articles:', error);
+            });
+    </script>
+</body>
+</html>

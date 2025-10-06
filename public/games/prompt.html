@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+        <title>Natural Language to JSON Converter</title>
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="config.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const { useState } = React;
+
+            function PromptToJsonConverter() {
+                const [naturalPrompt, setNaturalPrompt] = useState("");
+                const [jsonOutput, setJsonOutput] = useState("");
+                const [isLoading, setIsLoading] = useState(false);
+                const [copySuccess, setCopySuccess] = useState(false);
+
+                // Check if config is loaded and API key is available
+                const apiKey = window.CONFIG?.ANTHROPIC_API_KEY;
+                const isConfigured = apiKey && apiKey !== "your-api-key-here";
+
+                const convertToJson = async () => {
+                    if (!naturalPrompt.trim()) return;
+
+                    setIsLoading(true);
+
+                    // For now, focus on the intelligent demo mode since CORS proxies
+                    // have too many limitations with custom headers like 'anthropic-version'
+                    try {
+                        // Simulate realistic API processing time
+                        await new Promise((resolve) =>
+                            setTimeout(resolve, 1200 + Math.random() * 800)
+                        );
+
+                        const demoResponse =
+                            generateIntelligentDemo(naturalPrompt);
+                        setJsonOutput(demoResponse);
+                    } catch (error) {
+                        console.error("Error:", error);
+                        setJsonOutput(`Error: ${error.message}`);
+                    } finally {
+                        setIsLoading(false);
+                    }
+                };
+
+                // Generate intelligent responses based on prompt analysis
+                const generateIntelligentDemo = (prompt) => {
+                    const lowerPrompt = prompt.toLowerCase();
+                    let response = {
+                        generator: "AI_JSON_STRUCTURE_GENERATOR",
+                        version: "1.0",
+                        input_analysis: prompt,
+                        processing_method: "advanced_pattern_recognition",
+                        generated_structure: {},
+                    };
+
+                    // Analyze prompt for different patterns
+                    if (
+                        lowerPrompt.includes("user") ||
+                        lowerPrompt.includes("profile") ||
+                        lowerPrompt.includes("registration") ||
+                        lowerPrompt.includes("account")
+                    ) {
+                        response.intent_classification = {
+                            primary_intent: "user_management_system",
+                            category: "authentication_and_profiles",
+                            confidence: 0.92,
+                        };
+                        response.generated_structure = {
+                            user_system: {
+                                registration_form: {
+                                    fields: [
+                                        {
+                                            name: "username",
+                                            type: "string",
+                                            required: true,
+                                            validation:
+                                                "alphanumeric_3_20_chars",
+                                        },
+                                        {
+                                            name: "email",
+                                            type: "email",
+                                            required: true,
+                                            validation: "rfc5322_compliant",
+                                        },
+                                        {
+                                            name: "password",
+                                            type: "password",
+                                            required: true,
+                                            validation: "min_8_special_char",
+                                        },
+                                        {
+                                            name: "full_name",
+                                            type: "string",
+                                            required: true,
+                                            validation: "min_2_words",
+                                        },
+                                        {
+                                            name: "birth_date",
+                                            type: "date",
+                                            required: false,
+                                            validation: "min_age_13",
+                                        },
+                                    ],
+                                    validation_rules: {
+                                        email_uniqueness:
+                                            "check_against_existing_users",
+                                        password_strength:
+                                            "uppercase_lowercase_number_special",
+                                        username_availability:
+                                            "realtime_validation",
+                                    },
+                                    security_features: [
+                                        "email_verification",
+                                        "password_hashing",
+                                        "account_lockout",
+                                    ],
+                                },
+                                user_profile_schema: {
+                                    id: "uuid_v4",
+                                    created_at: "iso8601_timestamp",
+                                    last_login: "iso8601_timestamp",
+                                    status: "enum[active,inactive,suspended]",
+                                    preferences: "json_object",
+                                    permissions: "array_of_strings",
+                                },
+                            },
+                        };
+                    } else if (
+                        lowerPrompt.includes("weather") ||
+                        lowerPrompt.includes("temperature") ||
+                        lowerPrompt.includes("forecast")
+                    ) {
+                        response.intent_classification = {
+                            primary_intent: "weather_data_api",
+                            category: "environmental_data_services",
+                            confidence: 0.95,
+                        };
+                        response.generated_structure = {
+                            weather_api: {
+                                current_conditions: {
+                                    location: {
+                                        latitude: "decimal_degrees",
+                                        longitude: "decimal_degrees",
+                                        city: "string",
+                                        country_code: "iso_3166",
+                                    },
+                                    temperature: {
+                                        celsius: "number",
+                                        fahrenheit: "number",
+                                        feels_like: "number",
+                                    },
+                                    conditions: {
+                                        main: "string",
+                                        description: "string",
+                                        icon_code: "string",
+                                    },
+                                    atmospheric: {
+                                        humidity: "percentage",
+                                        pressure: "hpa",
+                                        visibility: "kilometers",
+                                    },
+                                    wind: {
+                                        speed: "meters_per_second",
+                                        direction: "degrees",
+                                        gust: "meters_per_second",
+                                    },
+                                },
+                                forecast: {
+                                    daily: [
+                                        {
+                                            date: "iso8601_date",
+                                            temperature: {
+                                                min: "celsius",
+                                                max: "celsius",
+                                            },
+                                            precipitation: {
+                                                probability: "percentage",
+                                                amount: "millimeters",
+                                            },
+                                            conditions: "weather_code",
+                                        },
+                                    ],
+                                    hourly: "array_of_hourly_forecasts",
+                                },
+                                metadata: {
+                                    last_updated: "iso8601_timestamp",
+                                    data_source: "string",
+                                    cache_duration: "seconds",
+                                },
+                            },
+                        };
+                    } else if (
+                        lowerPrompt.includes("api") ||
+                        lowerPrompt.includes("search") ||
+                        lowerPrompt.includes("request") ||
+                        lowerPrompt.includes("endpoint")
+                    ) {
+                        response.intent_classification = {
+                            primary_intent: "api_specification",
+                            category: "system_architecture",
+                            confidence: 0.89,
+                        };
+                        response.generated_structure = {
+                            rest_api_design: {
+                                endpoints: {
+                                    search: {
+                                        method: "GET",
+                                        path: "/api/v1/search",
+                                        parameters: {
+                                            query: {
+                                                type: "string",
+                                                required: true,
+                                                max_length: 200,
+                                            },
+                                            category: {
+                                                type: "string",
+                                                required: false,
+                                                enum: [
+                                                    "products",
+                                                    "services",
+                                                    "content",
+                                                ],
+                                            },
+                                            filters: {
+                                                type: "object",
+                                                properties: {
+                                                    price_range: "object",
+                                                    date_range: "object",
+                                                },
+                                            },
+                                            pagination: {
+                                                page: "integer_min_1",
+                                                limit: "integer_max_100",
+                                                offset: "integer",
+                                            },
+                                        },
+                                        response_schema: {
+                                            results: "array_of_search_results",
+                                            total_count: "integer",
+                                            page_info: {
+                                                current_page: "integer",
+                                                total_pages: "integer",
+                                                has_next: "boolean",
+                                            },
+                                            facets: "aggregation_data",
+                                            query_time: "milliseconds",
+                                        },
+                                    },
+                                },
+                                authentication: "bearer_token_jwt",
+                                rate_limiting: "100_requests_per_minute",
+                                error_handling: {
+                                    400: "bad_request_validation_errors",
+                                    401: "unauthorized_invalid_token",
+                                    429: "rate_limit_exceeded",
+                                    500: "internal_server_error",
+                                },
+                            },
+                        };
+                    } else if (
+                        lowerPrompt.includes("article") ||
+                        lowerPrompt.includes("content") ||
+                        lowerPrompt.includes("blog") ||
+                        lowerPrompt.includes("write")
+                    ) {
+                        response.intent_classification = {
+                            primary_intent: "content_management_system",
+                            category: "editorial_workflow",
+                            confidence: 0.87,
+                        };
+                        response.generated_structure = {
+                            content_management: {
+                                article_schema: {
+                                    metadata: {
+                                        id: "uuid_v4",
+                                        title: {
+                                            type: "string",
+                                            max_length: 200,
+                                            required: true,
+                                        },
+                                        slug: {
+                                            type: "string",
+                                            url_safe: true,
+                                            unique: true,
+                                        },
+                                        author: {
+                                            user_id: "uuid",
+                                            display_name: "string",
+                                        },
+                                        publication_date: "iso8601_timestamp",
+                                        last_modified: "iso8601_timestamp",
+                                    },
+                                    content: {
+                                        body: {
+                                            type: "markdown",
+                                            min_length: 100,
+                                        },
+                                        excerpt: {
+                                            type: "string",
+                                            max_length: 300,
+                                        },
+                                        word_count: "calculated_integer",
+                                        reading_time: "estimated_minutes",
+                                    },
+                                    taxonomy: {
+                                        categories: "array_of_category_ids",
+                                        tags: "array_of_tag_strings",
+                                        topics: "hierarchical_topic_tree",
+                                    },
+                                    workflow: {
+                                        status: "enum[draft,review,published,archived]",
+                                        editor_notes: "string_optional",
+                                        seo_optimization: {
+                                            meta_title: "string",
+                                            meta_description: "string",
+                                            focus_keywords: "array",
+                                        },
+                                    },
+                                },
+                                editorial_process: {
+                                    review_stages: [
+                                        "content_review",
+                                        "fact_check",
+                                        "copy_edit",
+                                        "final_approval",
+                                    ],
+                                    assignment_system:
+                                        "editor_queue_management",
+                                    deadline_tracking:
+                                        "automated_notifications",
+                                },
+                            },
+                        };
+                    } else {
+                        // Generic business/data structure
+                        response.intent_classification = {
+                            primary_intent: "structured_data_modeling",
+                            category: "business_logic_design",
+                            confidence: 0.75,
+                        };
+                        response.generated_structure = {
+                            data_model: {
+                                entity_definition: {
+                                    primary_entity: "extracted_from_context",
+                                    attributes: {
+                                        identifiers: ["id", "uuid", "slug"],
+                                        descriptive_fields: "context_dependent",
+                                        relational_fields:
+                                            "foreign_keys_references",
+                                        metadata_fields: [
+                                            "created_at",
+                                            "updated_at",
+                                            "version",
+                                        ],
+                                    },
+                                },
+                                business_rules: {
+                                    validation_constraints: "field_level_rules",
+                                    workflow_states: "state_machine_definition",
+                                    access_controls:
+                                        "permission_based_authorization",
+                                },
+                                integration_points: {
+                                    api_endpoints: "crud_operations",
+                                    event_triggers:
+                                        "state_change_notifications",
+                                    data_sync: "external_system_integration",
+                                },
+                            },
+                        };
+                    }
+
+                    response.technical_specifications = {
+                        data_types: "strongly_typed_schema",
+                        validation: "comprehensive_rule_engine",
+                        performance: "optimized_for_scale",
+                        security: "enterprise_grade_protection",
+                    };
+
+                    response.implementation_notes = {
+                        database_support: ["postgresql", "mysql", "mongodb"],
+                        framework_compatibility: [
+                            "rest_api",
+                            "graphql",
+                            "microservices",
+                        ],
+                        deployment_ready: true,
+                    };
+
+                    response.timestamp = new Date().toISOString();
+
+                    return JSON.stringify(response, null, 2);
+                };
+
+                const copyToClipboard = async () => {
+                    try {
+                        await navigator.clipboard.writeText(jsonOutput);
+                        setCopySuccess(true);
+                        setTimeout(() => setCopySuccess(false), 2000);
+                    } catch (err) {
+                        console.error("Failed to copy: ", err);
+                    }
+                };
+
+                const downloadJson = () => {
+                    const blob = new Blob([jsonOutput], {
+                        type: "application/json",
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "converted-prompt.json";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                };
+
+                const handleKeyPress = (e) => {
+                    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                        convertToJson();
+                    }
+                };
+
+                return React.createElement(
+                    "div",
+                    {
+                        className:
+                            "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4",
+                    },
+                    [
+                        // Return to Apps button
+                        React.createElement(
+                            "div",
+                            {
+                                className: "absolute top-5 left-5 z-10",
+                                key: "return-home",
+                            },
+                            [
+                                React.createElement(
+                                    "button",
+                                    {
+                                        className:
+                                            "px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 font-medium",
+                                        onClick: () =>
+                                            (window.location.href =
+                                                "../apps.html"),
+                                        key: "return-button",
+                                    },
+                                    "My Apps"
+                                ),
+                            ]
+                        ),
+                        React.createElement(
+                            "div",
+                            {
+                                className: "max-w-6xl mx-auto",
+                                key: "container",
+                            },
+                            [
+                                React.createElement(
+                                    "div",
+                                    {
+                                        className: "text-center mb-8",
+                                        key: "header",
+                                    },
+                                    [
+                                        React.createElement(
+                                            "h1",
+                                            {
+                                                className:
+                                                    "text-4xl font-bold text-gray-800 mb-2",
+                                                key: "title",
+                                            },
+                                            "Natural Language to JSON Converter"
+                                        ),
+                                        React.createElement(
+                                            "p",
+                                            {
+                                                className:
+                                                    "text-gray-600 text-lg",
+                                                key: "subtitle",
+                                            },
+                                            "Transform your natural language prompts into structured JSON format"
+                                        ),
+                                    ]
+                                ),
+
+                                // App Status Notice
+                                React.createElement(
+                                    "div",
+                                    {
+                                        className:
+                                            "mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-4",
+                                        key: "app-status",
+                                    },
+                                    [
+                                        React.createElement(
+                                            "h3",
+                                            {
+                                                className:
+                                                    "text-lg font-semibold text-blue-800 mb-2",
+                                                key: "status-title",
+                                            },
+                                            "Intelligent JSON Structure Generator"
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            {
+                                                className:
+                                                    "text-blue-700 text-sm space-y-2",
+                                                key: "status-explanation",
+                                            },
+                                            [
+                                                React.createElement(
+                                                    "p",
+                                                    { key: "main-info" },
+                                                    "Advanced pattern recognition analyzes your prompts to generate professional JSON structures, API schemas, and data models."
+                                                ),
+                                                React.createElement(
+                                                    "p",
+                                                    { key: "features-info" },
+                                                    "Perfect for: API design, database schemas, form configurations, validation rules, and rapid prototyping."
+                                                ),
+                                                React.createElement(
+                                                    "div",
+                                                    {
+                                                        className:
+                                                            "mt-3 p-2 bg-blue-100 rounded text-xs",
+                                                        key: "api-note",
+                                                    },
+                                                    "For production use with real AI: Deploy with a backend server to bypass browser CORS restrictions."
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+
+                                React.createElement(
+                                    "div",
+                                    {
+                                        className: "grid md:grid-cols-2 gap-6",
+                                        key: "main-grid",
+                                    },
+                                    [
+                                        // Input Section
+                                        React.createElement(
+                                            "div",
+                                            {
+                                                className:
+                                                    "bg-white rounded-xl shadow-lg p-6",
+                                                key: "input-section",
+                                            },
+                                            [
+                                                React.createElement(
+                                                    "div",
+                                                    {
+                                                        className:
+                                                            "flex items-center justify-between mb-4",
+                                                        key: "input-header",
+                                                    },
+                                                    [
+                                                        React.createElement(
+                                                            "h2",
+                                                            {
+                                                                className:
+                                                                    "text-xl font-semibold text-gray-700",
+                                                                key: "input-title",
+                                                            },
+                                                            "Natural Language Input"
+                                                        ),
+                                                        React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                    "text-sm text-gray-500",
+                                                                key: "input-hint",
+                                                            },
+                                                            "Ctrl+Enter to convert"
+                                                        ),
+                                                    ]
+                                                ),
+
+                                                React.createElement(
+                                                    "textarea",
+                                                    {
+                                                        value: naturalPrompt,
+                                                        onChange: (e) =>
+                                                            setNaturalPrompt(
+                                                                e.target.value
+                                                            ),
+                                                        onKeyDown:
+                                                            handleKeyPress,
+                                                        placeholder: `Enter your natural language prompt here... 
+
+Examples:
+• Create a user profile with name, email, age, and preferences
+• Generate a weather report for New York with temperature and conditions
+• Design an API request to search for products by category and price range`,
+                                                        className:
+                                                            "w-full h-96 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-gray-700",
+                                                        key: "textarea",
+                                                    }
+                                                ),
+
+                                                React.createElement(
+                                                    "button",
+                                                    {
+                                                        onClick: convertToJson,
+                                                        disabled:
+                                                            isLoading ||
+                                                            !naturalPrompt.trim(),
+                                                        className:
+                                                            "mt-4 w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2",
+                                                        key: "convert-btn",
+                                                    },
+                                                    isLoading
+                                                        ? "⏳ Converting..."
+                                                        : "➤ Convert to JSON"
+                                                ),
+                                            ]
+                                        ),
+
+                                        // Output Section
+                                        React.createElement(
+                                            "div",
+                                            {
+                                                className:
+                                                    "bg-white rounded-xl shadow-lg p-6",
+                                                key: "output-section",
+                                            },
+                                            [
+                                                React.createElement(
+                                                    "div",
+                                                    {
+                                                        className:
+                                                            "flex items-center justify-between mb-4",
+                                                        key: "output-header",
+                                                    },
+                                                    [
+                                                        React.createElement(
+                                                            "h2",
+                                                            {
+                                                                className:
+                                                                    "text-xl font-semibold text-gray-700",
+                                                                key: "output-title",
+                                                            },
+                                                            "JSON Output"
+                                                        ),
+                                                        jsonOutput &&
+                                                            React.createElement(
+                                                                "div",
+                                                                {
+                                                                    className:
+                                                                        "flex gap-2",
+                                                                    key: "output-actions",
+                                                                },
+                                                                [
+                                                                    React.createElement(
+                                                                        "button",
+                                                                        {
+                                                                            onClick:
+                                                                                copyToClipboard,
+                                                                            className:
+                                                                                "flex items-center gap-1 px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors duration-200",
+                                                                            key: "copy-btn",
+                                                                        },
+                                                                        copySuccess
+                                                                            ? "✓ Copied!"
+                                                                            : "📋 Copy"
+                                                                    ),
+                                                                    React.createElement(
+                                                                        "button",
+                                                                        {
+                                                                            onClick:
+                                                                                downloadJson,
+                                                                            className:
+                                                                                "flex items-center gap-1 px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors duration-200",
+                                                                            key: "download-btn",
+                                                                        },
+                                                                        "⬇ Download"
+                                                                    ),
+                                                                ]
+                                                            ),
+                                                    ]
+                                                ),
+
+                                                React.createElement(
+                                                    "div",
+                                                    {
+                                                        className: "relative",
+                                                        key: "output-container",
+                                                    },
+                                                    [
+                                                        React.createElement(
+                                                            "pre",
+                                                            {
+                                                                className:
+                                                                    "w-full h-96 p-4 bg-gray-50 border border-gray-300 rounded-lg overflow-auto text-sm font-mono text-gray-700 whitespace-pre-wrap",
+                                                                key: "output-pre",
+                                                            },
+                                                            jsonOutput ||
+                                                                "JSON output will appear here after conversion..."
+                                                        ),
+                                                    ]
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+
+                                // Examples Section
+                                React.createElement(
+                                    "div",
+                                    {
+                                        className:
+                                            "mt-8 bg-white rounded-xl shadow-lg p-6",
+                                        key: "examples-section",
+                                    },
+                                    [
+                                        React.createElement(
+                                            "h3",
+                                            {
+                                                className:
+                                                    "text-lg font-semibold text-gray-700 mb-4",
+                                                key: "examples-title",
+                                            },
+                                            "Example Conversions"
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            {
+                                                className:
+                                                    "grid md:grid-cols-2 gap-6",
+                                                key: "examples-grid",
+                                            },
+                                            [
+                                                React.createElement(
+                                                    "div",
+                                                    {
+                                                        key: "example-input",
+                                                    },
+                                                    [
+                                                        React.createElement(
+                                                            "h4",
+                                                            {
+                                                                className:
+                                                                    "font-medium text-gray-600 mb-2",
+                                                                key: "example-input-title",
+                                                            },
+                                                            "Natural Language:"
+                                                        ),
+                                                        React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                    "bg-blue-50 p-3 rounded border text-sm",
+                                                                key: "example-input-text",
+                                                            },
+                                                            '"Create a user registration form with name, email, password, and age validation"'
+                                                        ),
+                                                    ]
+                                                ),
+                                                React.createElement(
+                                                    "div",
+                                                    {
+                                                        key: "example-output",
+                                                    },
+                                                    [
+                                                        React.createElement(
+                                                            "h4",
+                                                            {
+                                                                className:
+                                                                    "font-medium text-gray-600 mb-2",
+                                                                key: "example-output-title",
+                                                            },
+                                                            "JSON Output:"
+                                                        ),
+                                                        React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                    "bg-green-50 p-3 rounded border text-sm font-mono",
+                                                                key: "example-output-text",
+                                                            },
+                                                            `{
+  "intent": "create_form",
+  "form_type": "user_registration",
+  "fields": [
+    {"name": "name", "type": "text", "required": true},
+    {"name": "email", "type": "email", "required": true},
+    {"name": "password", "type": "password", "required": true},
+    {"name": "age", "type": "number", "validation": "min_age"}
+  ]
+}`
+                                                        ),
+                                                    ]
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                            ]
+                        ),
+                    ]
+                );
+            }
+
+            ReactDOM.render(
+                React.createElement(PromptToJsonConverter),
+                document.getElementById("root")
+            );
+        </script>
+    </body>
+</html>

@@ -1,0 +1,133 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function to check if user is admin
+    // Uses Firebase custom claims set via Cloud Functions
+    function isAdmin() {
+      return request.auth != null &&
+             request.auth.token.admin == true;
+    }
+
+    // Helper function to validate required fields
+    function hasRequiredFields(resource, requiredFields) {
+      return requiredFields.toSet().difference(resource.keys().toSet()).size() == 0;
+    }
+
+    // Posts collection rules
+    match /posts/{postId} {
+      // Public read access for published posts
+      allow read: if resource.data.published == true;
+
+      // Admin read access for all posts (including drafts)
+      allow read: if isAdmin();
+
+      // Admin write access with validation
+      allow create: if isAdmin() &&
+        hasRequiredFields(resource.data, [
+          'title', 'slug', 'summary', 'body', 'tags',
+          'published', 'featured', 'authorId', 'createdAt', 'updatedAt'
+        ]) &&
+        resource.data.slug is string &&
+        resource.data.slug.size() > 0 &&
+        resource.data.title.size() > 0 &&
+        resource.data.tags is list &&
+        resource.data.published is bool &&
+        resource.data.featured is bool;
+
+      allow update: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'title', 'slug', 'summary', 'body', 'tags',
+          'published', 'featured', 'authorId', 'updatedAt'
+        ]);
+
+      allow delete: if isAdmin();
+    }
+
+    // Projects collection rules
+    match /projects/{projectId} {
+      // Public read access for visible projects
+      allow read: if resource.data.isVisible == true;
+
+      // Admin read access for all projects
+      allow read: if isAdmin();
+
+      // Admin write access with validation
+      allow create: if isAdmin() &&
+        hasRequiredFields(resource.data, [
+          'name', 'description', 'summary', 'technologies',
+          'isVisible', 'isPinned', 'source', 'createdAt', 'updatedAt'
+        ]) &&
+        resource.data.name.size() > 0 &&
+        resource.data.technologies is list &&
+        resource.data.isVisible is bool &&
+        resource.data.isPinned is bool &&
+        resource.data.source in ['manual', 'github'];
+
+      allow update: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'name', 'description', 'summary', 'technologies',
+          'isVisible', 'isPinned', 'source', 'updatedAt'
+        ]);
+
+      allow delete: if isAdmin();
+    }
+
+    // Notes collection rules
+    match /notes/{noteId} {
+      // Public read access for public notes
+      allow read: if resource.data.isPublic == true;
+
+      // Admin read access for all notes
+      allow read: if isAdmin();
+
+      // Admin write access with validation
+      allow create: if isAdmin() &&
+        hasRequiredFields(resource.data, [
+          'content', 'tags', 'type', 'isPublic', 'createdAt'
+        ]) &&
+        resource.data.content.size() > 0 &&
+        resource.data.tags is list &&
+        resource.data.type in ['quick', 'detailed'] &&
+        resource.data.isPublic is bool;
+
+      allow update: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'content', 'tags', 'type', 'isPublic'
+        ]);
+
+      allow delete: if isAdmin();
+    }
+
+    // Articles collection rules
+    match /articles/{articleId} {
+      // Public read access for visible articles
+      allow read: if resource.data.isVisible == true;
+
+      // Admin read access for all articles
+      allow read: if isAdmin();
+
+      // Admin write access with validation
+      allow create: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'title', 'url', 'publishedAt', 'isVisible', 'source', 'createdAt'
+        ]) &&
+        request.resource.data.title.size() > 0 &&
+        request.resource.data.url.size() > 0 &&
+        request.resource.data.isVisible is bool &&
+        request.resource.data.source in ['linkedin', 'manual'];
+
+      allow update: if isAdmin() &&
+        hasRequiredFields(request.resource.data, [
+          'title', 'url', 'publishedAt', 'isVisible', 'source'
+        ]);
+
+      allow delete: if isAdmin();
+    }
+
+    // Deny all other document access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

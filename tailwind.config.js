@@ -1,0 +1,147 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // Dynamic colors using CSS variables
+        primary: {
+          DEFAULT: 'var(--primary-color)',
+          50: 'color-mix(in srgb, var(--primary-color) 10%, white)',
+          100: 'color-mix(in srgb, var(--primary-color) 20%, white)',
+          200: 'color-mix(in srgb, var(--primary-color) 30%, white)',
+          300: 'color-mix(in srgb, var(--primary-color) 50%, white)',
+          400: 'color-mix(in srgb, var(--primary-color) 70%, white)',
+          500: 'var(--primary-color)',
+          600: 'color-mix(in srgb, var(--primary-color) 80%, black)',
+          700: 'color-mix(in srgb, var(--primary-color) 70%, black)',
+          800: 'color-mix(in srgb, var(--primary-color) 60%, black)',
+          900: 'color-mix(in srgb, var(--primary-color) 50%, black)',
+        },
+        secondary: {
+          DEFAULT: 'var(--secondary-color)',
+          50: 'color-mix(in srgb, var(--secondary-color) 10%, white)',
+          100: 'color-mix(in srgb, var(--secondary-color) 20%, white)',
+          200: 'color-mix(in srgb, var(--secondary-color) 30%, white)',
+          300: 'color-mix(in srgb, var(--secondary-color) 50%, white)',
+          400: 'color-mix(in srgb, var(--secondary-color) 70%, white)',
+          500: 'var(--secondary-color)',
+          600: 'var(--secondary-color)',
+          700: 'color-mix(in srgb, var(--secondary-color) 70%, black)',
+          800: 'color-mix(in srgb, var(--secondary-color) 60%, black)',
+          900: 'color-mix(in srgb, var(--secondary-color) 50%, black)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent-color)',
+          50: 'color-mix(in srgb, var(--accent-color) 10%, white)',
+          100: 'color-mix(in srgb, var(--accent-color) 20%, white)',
+          200: 'color-mix(in srgb, var(--accent-color) 30%, white)',
+          300: 'color-mix(in srgb, var(--accent-color) 50%, white)',
+          400: 'color-mix(in srgb, var(--accent-color) 70%, white)',
+          500: 'var(--accent-color)',
+          600: 'color-mix(in srgb, var(--accent-color) 80%, black)',
+          700: 'color-mix(in srgb, var(--accent-color) 70%, black)',
+          800: 'color-mix(in srgb, var(--accent-color) 60%, black)',
+          900: 'color-mix(in srgb, var(--accent-color) 50%, black)',
+        },
+        warning: {
+          50: '#fffbeb',
+          100: '#fef3c7',
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
+        },
+        error: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+        },
+        // Semantic colors - DARK THEME
+        background: '#121212',
+        foreground: '#e0e0e0',
+        muted: '#1e1e1e',
+        'muted-foreground': '#cccccc',
+        border: '#292929',
+        card: '#1e1e1e',
+        'card-foreground': '#e0e0e0',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+        '5xl': ['3rem', { lineHeight: '1' }],
+        '6xl': ['3.75rem', { lineHeight: '1' }],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+      },
+      borderRadius: {
+        'lg': '0.5rem',
+        'xl': '0.75rem',
+        '2xl': '1rem',
+      },
+      boxShadow: {
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'medium': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'large': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        'glow': '0 0 20px rgba(168, 85, 247, 0.4)',
+        'glow-lg': '0 0 40px rgba(168, 85, 247, 0.6)',
+        'inner-glow': 'inset 0 0 20px rgba(168, 85, 247, 0.3)',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-mesh': 'radial-gradient(at 40% 20%, hsla(280, 90%, 70%, 0.3) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(180, 100%, 60%, 0.3) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(25, 100%, 60%, 0.3) 0px, transparent 50%)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'fade-in-up': 'fadeInUp 0.8s ease forwards',
+        'slide-in': 'slideIn 0.4s ease-out',
+        'scale-in': 'scaleIn 0.3s ease-out',
+        'gradient-shift': 'gradientShift 10s ease infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideIn: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.9)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        gradientShift: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
+    },
+  },
+  plugins: [],
+}

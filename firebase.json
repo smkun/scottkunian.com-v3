@@ -1,0 +1,154 @@
+{
+  "functions": {
+    "source": "functions",
+    "codebase": "default",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log"
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/field-notes/**",
+        "destination": "/notes",
+        "type": 301
+      },
+      {
+        "source": "/portfolio/**",
+        "destination": "/projects",
+        "type": 301
+      },
+      {
+        "source": "/work/**",
+        "destination": "/projects",
+        "type": 301
+      },
+      {
+        "source": "/contact-me",
+        "destination": "/contact",
+        "type": 301
+      },
+      {
+        "source": "/get-in-touch",
+        "destination": "/contact",
+        "type": 301
+      },
+      {
+        "source": "/hire-me",
+        "destination": "/contact",
+        "type": 301
+      },
+      {
+        "source": "/wp-admin/**",
+        "destination": "/admin",
+        "type": 301
+      },
+      {
+        "source": "/dashboard/**",
+        "destination": "/admin",
+        "type": 301
+      },
+      {
+        "source": "/feed",
+        "destination": "/rss.xml",
+        "type": 301
+      },
+      {
+        "source": "/rss",
+        "destination": "/rss.xml",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|webp|avif)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(woff|woff2|ttf|otf)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "/rss.xml",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/rss+xml; charset=utf-8"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      },
+      {
+        "source": "/sitemap.xml",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/xml; charset=utf-8"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

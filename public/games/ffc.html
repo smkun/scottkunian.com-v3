@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facility Fee Calculator</title>
+    <link rel="stylesheet" href="../CSS/ffc.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="../SCRIPTS/facilityFeeCalculator.js" defer></script>
+</head>
+<body>
+    <div class="return-home">
+        <button onclick="window.location.href='../apps.html'">My Apps</button>
+    </div>
+
+    <div class="calculator-wrapper">
+        <h1>Facility Fee Freight Calculator</h1>
+        
+        <div>
+            <input type="button" class="btn-clear" value="Clear Sheet" onclick="redraw();" />
+        </div>
+
+        <div>
+            <label for="regionSelection" onchange="clearStuff()">Select your Region:</label>
+            <select id="regionSelection" name="regionSelection"></select>
+        </div>
+
+        <!-- FACFER - FERR Section -->
+        <div class="block-container">
+            <div class="block-title">FACFER - Facility Fee - FERR</div>
+            <div id="feBlock"></div>
+
+            <div><span class="title">Total FE Weight in Lbs:</span> <span class="result" id="totalFeWeightLbs">&nbsp;</span></div>
+            <div><span class="title">Total FE Weight in GT:</span> <span class="result" id="totalFeWeightGt">&nbsp;</span></div>
+            <div>
+                <span class="title">Total FACFER Facility Fee:</span> <span class="result" id="feTotalFee">&nbsp;</span>
+                <input type="button" class="btn-calc" value="Calc" onclick="calcFe();" />
+            </div>
+        </div>
+
+        <!-- FACFER - NFR Section -->
+        <div class="block-container">
+            <div class="block-title">FACFER - Facility Fee - NFR</div>
+            <div id="nfBlock"></div>
+
+            <div><span class="title">Total NF Weight in Lbs:</span> <span class="result" id="totalNfWeightLbs">&nbsp;</span></div>
+            <div>
+                <span class="title">Total FACNFR Facility Fee:</span> <span class="result" id="nfTotalFee">&nbsp;</span>
+                <input type="button" class="btn-calc" value="Calc" onclick="calcNf();" />
+            </div>
+        </div>
+
+        <!-- FACFER - CAT Section -->
+        <div class="block-container">
+            <div class="block-title">FACFER - Facility Fee - CAT</div>
+            <div id="catBlock"></div>
+
+            <div><span class="title">Total Cat Count:</span> <span class="result" id="totalCatCount">&nbsp;</span></div>
+            <div>
+                <span class="title">Total FACCAT Facility Fee:</span> <span class="result" id="catTotalFee">&nbsp;</span>
+                <input type="button" class="btn-calc" value="Calc" onclick="calcCat();" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

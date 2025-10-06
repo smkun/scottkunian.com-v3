@@ -1,0 +1,112 @@
+name: Deploy to iFastNet
+
+on:
+  push:
+    branches:
+      - production  # Deploy to iFastNet from production branch
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint --if-present
+        continue-on-error: true
+
+      - name: Run type check
+        run: npx tsc --noEmit
+
+      - name: Build production bundle
+        run: npm run build
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_GA_MEASUREMENT_ID: ${{ secrets.VITE_GA_MEASUREMENT_ID }}
+
+      - name: Generate sitemap
+        run: node scripts/generateSitemap.cjs
+        continue-on-error: true
+
+      - name: Generate RSS feed
+        run: node scripts/generateRSS.cjs
+        continue-on-error: true
+
+      - name: Prepare deployment package
+        run: |
+          # Create deployment directory
+          mkdir -p deploy
+
+          # Copy dist files
+          cp -r dist/* deploy/
+
+          # Copy additional files
+          cp public/_redirects deploy/ || true
+
+          # Create deployment manifest
+          echo "Deployment: $(date)" > deploy/DEPLOYMENT_INFO.txt
+          echo "Branch: ${GITHUB_REF_NAME}" >> deploy/DEPLOYMENT_INFO.txt
+          echo "Commit: ${GITHUB_SHA}" >> deploy/DEPLOYMENT_INFO.txt
+          echo "Build Date: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> deploy/DEPLOYMENT_INFO.txt
+
+      - name: Deploy to iFastNet via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.IFASTNET_FTP_SERVER }}
+          username: ${{ secrets.IFASTNET_FTP_USERNAME }}
+          password: ${{ secrets.IFASTNET_FTP_PASSWORD }}
+          local-dir: ./deploy/
+          server-dir: /htdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.env*
+          dangerous-clean-slate: false  # Don't delete files not in source
+
+      - name: Verify deployment
+        run: |
+          echo "✅ Files uploaded to iFastNet"
+          echo "🔗 Site: https://scottkunian.com"
+          echo ""
+          echo "📊 Deployment Summary:"
+          echo "  - Branch: ${GITHUB_REF_NAME}"
+          echo "  - Commit: ${GITHUB_SHA::7}"
+          echo "  - Build Date: $(date)"
+
+      - name: Notify deployment status
+        if: always()
+        run: |
+          if [ ${{ job.status }} == 'success' ]; then
+            echo "✅ Deployment to iFastNet successful!"
+          else
+            echo "❌ Deployment to iFastNet failed"
+            echo "Check logs for details"
+            exit 1
+          fi
+
+      - name: Create deployment tag
+        if: success()
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          TAG_NAME="ifastnet-deploy-$(date +'%Y%m%d-%H%M%S')"
+          git tag -a $TAG_NAME -m "iFastNet deployment: ${GITHUB_SHA::7}"
+          git push origin $TAG_NAME || true

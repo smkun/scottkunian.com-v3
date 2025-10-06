@@ -1,0 +1,36 @@
+# URL Redirects Configuration for ScottKunian.com v4
+# Compatible with Netlify, Firebase Hosting, and most static hosts
+
+# Legacy field notes redirects (if migrating from existing site)
+# Pattern: /field-notes/YYYY/MM/slug -> /notes
+/field-notes/*  /notes  301
+
+# Legacy blog post redirects (if URL structure changed)
+# Pattern: /blog/YYYY/MM/DD/slug -> /blog/slug
+/blog/20*/*/*  /blog/:splat  301
+
+# Legacy project redirects (if migrating from portfolio site)
+# Pattern: /portfolio/* -> /projects
+/portfolio/*  /projects  301
+/work/*      /projects  301
+
+# Common misspellings and variations
+/contact-me   /contact  301
+/get-in-touch /contact  301
+/hire-me      /contact  301
+
+# Old admin paths (if changing admin structure)
+/wp-admin/*   /admin  301
+/dashboard/*  /admin  301
+
+# Social media profile redirects (short URLs)
+/linkedin     https://linkedin.com/in/scottkunian  302
+/github       https://github.com/scottkunian  302
+/twitter      https://twitter.com/scottkunian  302
+
+# RSS and sitemap (ensure they work with or without extension)
+/feed         /rss.xml  301
+/rss          /rss.xml  301
+
+# 404 fallback - SPA handling
+/*            /index.html  200

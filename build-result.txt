@@ -1,0 +1,41 @@
+
+> scottkunian-com-v4@0.0.0 build
+> tsc && vite build
+
+src/App.tsx(11,32): error TS2307: Cannot find module './admin/dashboard/AdminDashboard' or its corresponding type declarations.
+src/admin/NotesManager.tsx(7,58): error TS6133: 'updateDocument' is declared but its value is never read.
+src/admin/NotesManager.tsx(164,32): error TS2322: Type '"secondary" | "accent" | "destructive"' is not assignable to type '"primary" | "secondary" | "error" | "accent" | "warning" | undefined'.
+  Type '"destructive"' is not assignable to type '"primary" | "secondary" | "error" | "accent" | "warning" | undefined'.
+src/admin/NotesManager.tsx(230,9): error TS6133: 'user' is declared but its value is never read.
+src/admin/PostsManager.tsx(9,42): error TS6133: 'updateDocument' is declared but its value is never read.
+src/components/ErrorBoundary.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/auth/ProtectedRoute.tsx(15,9): error TS6133: 'location' is declared but its value is never read.
+src/components/editor/MarkdownEditor.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/editor/MarkdownEditor.tsx(215,55): error TS6133: 'match' is declared but its value is never read.
+src/components/ui/Card.tsx(54,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 260 more ...; className: string; }' is not assignable to type 'SVGProps<SVGSymbolElement>'.
+  Types of property 'onCopy' are incompatible.
+    Type 'ClipboardEventHandler<HTMLHeadingElement> | undefined' is not assignable to type 'ClipboardEventHandler<SVGSymbolElement> | undefined'.
+      Type 'ClipboardEventHandler<HTMLHeadingElement>' is not assignable to type 'ClipboardEventHandler<SVGSymbolElement>'.
+        Type 'HTMLHeadingElement' is missing the following properties from type 'SVGSymbolElement': ownerSVGElement, viewportElement, preserveAspectRatio, viewBox
+src/components/ui/Card.tsx(55,9): error TS2590: Expression produces a union type that is too complex to represent.
+src/lib/firebase.ts(4,10): error TS2305: Module '"firebase/storage"' has no exported member 'getStorage'.
+src/lib/firebase.ts(7,23): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/firebase.ts(8,27): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/firebase.ts(9,26): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/firebase.ts(10,30): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/firebase.ts(11,34): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/firebase.ts(12,22): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/firestore.ts(12,3): error TS6133: 'limit' is declared but its value is never read.
+src/lib/firestore.ts(165,14): error TS2352: Conversion of type '{ id: string; }' to type 'T' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  '{ id: string; }' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint 'DocumentData'.
+src/lib/firestore.ts(184,43): error TS2352: Conversion of type '{ id: string; }' to type 'T' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  '{ id: string; }' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint 'DocumentData'.
+src/lib/storage.ts(2,3): error TS2305: Module '"firebase/storage"' has no exported member 'ref'.
+src/lib/storage.ts(3,3): error TS2305: Module '"firebase/storage"' has no exported member 'uploadBytes'.
+src/lib/storage.ts(4,3): error TS2305: Module '"firebase/storage"' has no exported member 'getDownloadURL'.
+src/lib/storage.ts(5,3): error TS2305: Module '"firebase/storage"' has no exported member 'deleteObject'.
+src/lib/storage.ts(6,3): error TS2305: Module '"firebase/storage"' has no exported member 'listAll'.
+src/lib/storage.ts(57,24): error TS7006: Parameter 'itemRef' implicitly has an 'any' type.
+src/pages/Blog/Blog.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/Blog/Blog.tsx(432,55): error TS6133: 'match' is declared but its value is never read.
+src/pages/admin/Login.tsx(1,8): error TS6133: 'React' is declared but its value is never read.

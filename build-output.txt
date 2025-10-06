@@ -1,0 +1,33 @@
+
+> scottkunian-com-v4@0.0.0 build
+> tsc && vite build
+
+src/admin/NotesManager.tsx(8,1): error TS6133: 'useAuth' is declared but its value is never read.
+src/admin/NotesManager.tsx(164,32): error TS2322: Type '"secondary" | "accent" | "destructive"' is not assignable to type '"primary" | "secondary" | "error" | "accent" | "warning" | undefined'.
+  Type '"destructive"' is not assignable to type '"primary" | "secondary" | "error" | "accent" | "warning" | undefined'.
+src/components/auth/ProtectedRoute.tsx(15,9): error TS6133: 'location' is declared but its value is never read.
+src/components/editor/MarkdownEditor.tsx(215,55): error TS6133: 'match' is declared but its value is never read.
+src/components/ui/Card.tsx(54,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 260 more ...; className: string; }' is not assignable to type 'SVGProps<SVGSymbolElement>'.
+  Types of property 'onCopy' are incompatible.
+    Type 'ClipboardEventHandler<HTMLHeadingElement> | undefined' is not assignable to type 'ClipboardEventHandler<SVGSymbolElement> | undefined'.
+      Type 'ClipboardEventHandler<HTMLHeadingElement>' is not assignable to type 'ClipboardEventHandler<SVGSymbolElement>'.
+        Type 'HTMLHeadingElement' is missing the following properties from type 'SVGSymbolElement': ownerSVGElement, viewportElement, preserveAspectRatio, viewBox
+src/components/ui/Card.tsx(55,9): error TS2590: Expression produces a union type that is too complex to represent.
+src/lib/firestore.ts(12,3): error TS6133: 'limit' is declared but its value is never read.
+src/lib/firestore.ts(165,14): error TS2352: Conversion of type '{ id: string; }' to type 'T' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  '{ id: string; }' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint 'DocumentData'.
+src/lib/firestore.ts(184,43): error TS2352: Conversion of type '{ id: string; }' to type 'T' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  '{ id: string; }' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint 'DocumentData'.
+src/lib/storage.ts(9,13): error TS2339: Property 'getStorage' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(9,25): error TS2339: Property 'ref' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(9,30): error TS2339: Property 'uploadBytes' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(9,43): error TS2339: Property 'getDownloadURL' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(37,13): error TS2339: Property 'getStorage' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(37,25): error TS2339: Property 'ref' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(37,30): error TS2339: Property 'deleteObject' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(53,13): error TS2339: Property 'getStorage' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(53,25): error TS2339: Property 'ref' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(53,30): error TS2339: Property 'listAll' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(53,39): error TS2339: Property 'getDownloadURL' does not exist on type '{ default: typeof import("/home/skunian/code/MyCode/ScottKunian.com-v4/node_modules/firebase/storage/dist/storage/index"); }'.
+src/lib/storage.ts(60,24): error TS7006: Parameter 'itemRef' implicitly has an 'any' type.
+src/pages/Blog/Blog.tsx(432,55): error TS6133: 'match' is declared but its value is never read.

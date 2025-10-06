@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="../CSS/memory.css">
+    <script src="../SCRIPTS/memory.js" defer></script>
+</head>
+<body>
+    <div class="return-home">
+        <button onclick="window.location.href='../apps.html'">My Apps</button>
+    </div>
+    <div id="difficultyWrapper">
+        <div id="difficulty">
+            <button id="easyBtn">Easy (36 guesses)</button>
+            <button id="normalBtn">Normal (27 guesses)</button>
+            <button id="hardBtn">Hard (18 guesses)</button>
+        </div>
+    </div>
+    <div id="gameBackground">
+        <div id="game" class="hidden"></div>
+    </div>
+    <p id="guessCounter">Guesses Left: <span id="guessesLeft"></span></p>
+    <div id="gameMessage"></div>
+</body>
+</html>
