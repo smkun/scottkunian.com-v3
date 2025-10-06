@@ -27,16 +27,16 @@ service cloud.firestore {
 
       // Admin write access with validation
       allow create: if isAdmin() &&
-        hasRequiredFields(resource.data, [
+        hasRequiredFields(request.resource.data, [
           'title', 'slug', 'summary', 'body', 'tags',
           'published', 'featured', 'authorId', 'createdAt', 'updatedAt'
         ]) &&
-        resource.data.slug is string &&
-        resource.data.slug.size() > 0 &&
-        resource.data.title.size() > 0 &&
-        resource.data.tags is list &&
-        resource.data.published is bool &&
-        resource.data.featured is bool;
+        request.resource.data.slug is string &&
+        request.resource.data.slug.size() > 0 &&
+        request.resource.data.title.size() > 0 &&
+        request.resource.data.tags is list &&
+        request.resource.data.published is bool &&
+        request.resource.data.featured is bool;
 
       allow update: if isAdmin() &&
         hasRequiredFields(request.resource.data, [
@@ -92,13 +92,13 @@ service cloud.firestore {
 
       // Admin write access with validation
       allow create: if isAdmin() &&
-        hasRequiredFields(resource.data, [
+        hasRequiredFields(request.resource.data, [
           'content', 'tags', 'type', 'isPublic', 'createdAt'
         ]) &&
-        resource.data.content.size() > 0 &&
-        resource.data.tags is list &&
-        resource.data.type in ['quick', 'detailed'] &&
-        resource.data.isPublic is bool;
+        request.resource.data.content.size() > 0 &&
+        request.resource.data.tags is list &&
+        request.resource.data.type in ['quick', 'detailed'] &&
+        request.resource.data.isPublic is bool;
 
       allow update: if isAdmin() &&
         hasRequiredFields(request.resource.data, [

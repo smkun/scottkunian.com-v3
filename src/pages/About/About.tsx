@@ -200,7 +200,7 @@ export function About() {
               <li className="leading-relaxed flex items-start gap-3 p-1 rounded-lg hover:bg-primary/5 transition-colors duration-300">
                 <span className="text-accent text-xl">•</span>
                 <div>
-                  <span className="text-accent font-semibold">MMO Healer Street Cred:</span> Former <span className="text-primary font-semibold">server first Healing Paladin in WoW: Burning Crusade</span>. Today you still main support and plan a Wand/Bow healer in Throne and Liberty.
+                  <span className="text-accent font-semibold">MMO Healer Street Cred:</span> Former <span className="text-primary font-semibold">server first Healing Paladin in WoW: Burning Crusade</span>. Today I still main support and plan a Wand/Bow healer in Throne and Liberty.
                 </div>
               </li>
               <li className="leading-relaxed flex items-start gap-3 p-1 rounded-lg hover:bg-primary/5 transition-colors duration-300">

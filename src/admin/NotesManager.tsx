@@ -1,11 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Badge } from '../components/ui/Badge';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
-import { Note, getNotes, createDocument, deleteDocument, updateDocument, getDocument, COLLECTIONS } from '../lib/firestore';
+import {
+  Note,
+  getNotes,
+  createDocument,
+  deleteDocument,
+  updateDocument,
+  getDocument,
+  COLLECTIONS,
+} from '../lib/firestore';
+import { auth } from '../lib/firebase';
 import { Timestamp } from 'firebase/firestore';
 
 export function NotesManager() {
@@ -23,7 +38,10 @@ function NotesList() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [noteToDelete, setNoteToDelete] = useState<{ id: string; content: string } | null>(null);
+  const [noteToDelete, setNoteToDelete] = useState<{
+    id: string;
+    content: string;
+  } | null>(null);
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
@@ -48,7 +66,8 @@ function NotesList() {
   };
 
   const handleDeleteClick = (id: string, content: string) => {
-    const preview = content.length > 50 ? content.substring(0, 50) + '...' : content;
+    const preview =
+      content.length > 50 ? content.substring(0, 50) + '...' : content;
     setNoteToDelete({ id, content: preview });
     setDeleteDialogOpen(true);
   };
@@ -59,7 +78,7 @@ function NotesList() {
     setDeleting(true);
     try {
       await deleteDocument(COLLECTIONS.NOTES, noteToDelete.id);
-      setNotes(notes.filter(note => note.id !== noteToDelete.id));
+      setNotes(notes.filter((note) => note.id !== noteToDelete.id));
       setDeleteDialogOpen(false);
       setNoteToDelete(null);
     } catch (error) {
@@ -74,7 +93,7 @@ function NotesList() {
     setNoteToDelete(null);
   };
 
-  const filteredNotes = notes.filter(note =>
+  const filteredNotes = notes.filter((note) =>
     note.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -116,9 +135,13 @@ function NotesList() {
         <Card>
           <CardContent className="text-center py-12">
             <div className="text-4xl mb-4">📋</div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">No notes yet</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              No notes yet
+            </h3>
             <p className="text-muted-foreground mb-4">
-              {searchTerm ? 'No nybles match your search.' : 'Start capturing your thoughts and stories.'}
+              {searchTerm
+                ? 'No nybles match your search.'
+                : 'Start capturing your thoughts and stories.'}
             </p>
             {!searchTerm && (
               <Button asChild>
@@ -136,10 +159,15 @@ function NotesList() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       {note.mood && (
-                        <Badge variant={
-                          note.mood === 'positive' ? 'accent' :
-                          note.mood === 'critical' ? 'error' : 'secondary'
-                        }>
+                        <Badge
+                          variant={
+                            note.mood === 'positive'
+                              ? 'accent'
+                              : note.mood === 'critical'
+                                ? 'error'
+                                : 'secondary'
+                          }
+                        >
                           {note.mood}
                         </Badge>
                       )}
@@ -150,8 +178,7 @@ function NotesList() {
                     <CardDescription className="text-foreground whitespace-pre-wrap">
                       {note.content.length > 300
                         ? `${note.content.substring(0, 300)}...`
-                        : note.content
-                      }
+                        : note.content}
                     </CardDescription>
                   </div>
                   <div className="flex items-center gap-2 ml-4">
@@ -258,6 +285,21 @@ function NybleEditor() {
 
     setLoading(true);
     try {
+      // Ensure the current user has admin claim before allowing writes
+      const user = auth.currentUser;
+      if (!user) {
+        alert('You must be signed in as an admin to save nybles.');
+        setLoading(false);
+        return;
+      }
+      const idToken = await user.getIdTokenResult();
+      if (!idToken.claims || !idToken.claims.admin) {
+        alert(
+          'Insufficient permissions: only admins can create or edit nybles.'
+        );
+        setLoading(false);
+        return;
+      }
       // Format content with heading if provided
       const formattedContent = nyble.heading.trim()
         ? `**${nyble.heading.trim()}**\n\n${nyble.content.trim()}`
@@ -269,7 +311,7 @@ function NybleEditor() {
         type: 'quick', // All nybles are 'quick' type now
         mood: nyble.mood,
         isPublic: nyble.isPublic,
-        createdAt: id ? undefined as any : Timestamp.now(), // Don't update createdAt on edit
+        createdAt: id ? (undefined as any) : Timestamp.now(), // Don't update createdAt on edit
         updatedAt: Timestamp.now(),
       };
 
@@ -310,7 +352,9 @@ function NybleEditor() {
             {id ? 'Edit Nyble' : 'New Nyble'}
           </h1>
           <p className="text-muted-foreground">
-            {id ? 'Update your thought or story' : 'Capture a quick thought or story'}
+            {id
+              ? 'Update your thought or story'
+              : 'Capture a quick thought or story'}
           </p>
         </div>
         <Button variant="outline" asChild>
@@ -332,7 +376,9 @@ function NybleEditor() {
               <Input
                 placeholder="Enter a heading for your nyble..."
                 value={nyble.heading}
-                onChange={(e) => setNyble(prev => ({ ...prev, heading: e.target.value }))}
+                onChange={(e) =>
+                  setNyble((prev) => ({ ...prev, heading: e.target.value }))
+                }
                 maxLength={100}
               />
               <p className="text-xs text-muted-foreground mt-1">
@@ -348,7 +394,9 @@ function NybleEditor() {
               <textarea
                 className="w-full h-48 p-3 border border-border rounded-lg resize-y bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 value={nyble.content}
-                onChange={(e) => setNyble(prev => ({ ...prev, content: e.target.value }))}
+                onChange={(e) =>
+                  setNyble((prev) => ({ ...prev, content: e.target.value }))
+                }
                 placeholder="What's on your mind?"
               />
             </div>
@@ -360,16 +408,23 @@ function NybleEditor() {
                   Mood
                 </label>
                 <div className="flex gap-2">
-                  {(['positive', 'neutral', 'critical'] as const).map((mood) => (
-                    <Button
-                      key={mood}
-                      variant={nyble.mood === mood ? 'secondary' : 'ghost'}
-                      size="small"
-                      onClick={() => setNyble(prev => ({ ...prev, mood }))}
-                    >
-                      {mood === 'positive' ? '😊' : mood === 'critical' ? '🤔' : '😐'} {mood}
-                    </Button>
-                  ))}
+                  {(['positive', 'neutral', 'critical'] as const).map(
+                    (mood) => (
+                      <Button
+                        key={mood}
+                        variant={nyble.mood === mood ? 'secondary' : 'ghost'}
+                        size="small"
+                        onClick={() => setNyble((prev) => ({ ...prev, mood }))}
+                      >
+                        {mood === 'positive'
+                          ? '😊'
+                          : mood === 'critical'
+                            ? '🤔'
+                            : '😐'}{' '}
+                        {mood}
+                      </Button>
+                    )
+                  )}
                 </div>
               </div>
 
@@ -377,7 +432,12 @@ function NybleEditor() {
                 <input
                   type="checkbox"
                   checked={nyble.isPublic}
-                  onChange={(e) => setNyble(prev => ({ ...prev, isPublic: e.target.checked }))}
+                  onChange={(e) =>
+                    setNyble((prev) => ({
+                      ...prev,
+                      isPublic: e.target.checked,
+                    }))
+                  }
                   className="rounded"
                 />
                 <span className="text-sm">Make this nyble public</span>
@@ -391,7 +451,7 @@ function NybleEditor() {
                 disabled={loading || !nyble.content.trim()}
                 className="flex-1"
               >
-                {loading ? 'Saving...' : (id ? 'Update Nyble' : 'Save Nyble')}
+                {loading ? 'Saving...' : id ? 'Update Nyble' : 'Save Nyble'}
               </Button>
               <Button
                 variant="outline"
