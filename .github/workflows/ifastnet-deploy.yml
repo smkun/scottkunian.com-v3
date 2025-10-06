@@ -72,9 +72,12 @@ jobs:
           server: ${{ secrets.IFASTNET_FTP_SERVER }}
           username: ${{ secrets.IFASTNET_FTP_USERNAME }}
           password: ${{ secrets.IFASTNET_FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
           local-dir: ./deploy/
           server-dir: /public_html/scottkunian.com/
           state-name: .ftp-deploy-sync-state.json
+          timeout: 600000
           exclude: |
             **/.git*
             **/.git*/**
