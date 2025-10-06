@@ -73,7 +73,7 @@ jobs:
           username: ${{ secrets.IFASTNET_FTP_USERNAME }}
           password: ${{ secrets.IFASTNET_FTP_PASSWORD }}
           local-dir: ./deploy/
-          server-dir: /htdocs/
+          server-dir: /public_html/scottkunian.com/
           exclude: |
             **/.git*
             **/.git*/**
