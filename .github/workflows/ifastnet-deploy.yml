@@ -74,6 +74,7 @@ jobs:
           password: ${{ secrets.IFASTNET_FTP_PASSWORD }}
           local-dir: ./deploy/
           server-dir: /public_html/scottkunian.com/
+          state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
             **/.git*/**
@@ -110,3 +111,4 @@ jobs:
           TAG_NAME="ifastnet-deploy-$(date +'%Y%m%d-%H%M%S')"
           git tag -a $TAG_NAME -m "iFastNet deployment: ${GITHUB_SHA::7}"
           git push origin $TAG_NAME || true
+
